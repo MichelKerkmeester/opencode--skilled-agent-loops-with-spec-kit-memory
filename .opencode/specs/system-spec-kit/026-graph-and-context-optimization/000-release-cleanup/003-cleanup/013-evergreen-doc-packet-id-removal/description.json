@@ -1,0 +1,24 @@
+{
+  "specFolder": "system-spec-kit/026-graph-and-context-optimization/000-release-cleanup/013-evergreen-doc-packet-id-removal",
+  "description": "Feature Specification: Evergreen Doc Packet ID Removal",
+  "keywords": [
+    "feature",
+    "specification",
+    "evergreen",
+    "doc",
+    "packet",
+    "removal"
+  ],
+  "lastUpdated": "2026-05-08T08:26:57.323Z",
+  "specId": "027",
+  "folderSlug": "evergreen-doc-packet-id-removal",
+  "parentChain": [
+    "system-spec-kit",
+    "026-graph-and-context-optimization",
+    "000-release-cleanup"
+  ],
+  "memorySequence": 2,
+  "memoryNameHistory": [
+    "29-04-26_19-40__resource-map-authored-and-memory-finalization.md"
+  ]
+}

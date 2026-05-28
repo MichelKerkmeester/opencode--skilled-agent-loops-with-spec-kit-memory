@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "type": "module",
   "dependencies": {
-    "vitest": "^1.0.0"
+    "vitest": "^4.1.7"
   }
 }

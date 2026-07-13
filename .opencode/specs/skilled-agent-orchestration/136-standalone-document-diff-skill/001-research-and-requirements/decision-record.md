@@ -147,3 +147,41 @@ The user needs a Git-style before-and-after view for AI-edited documents that ma
 **How to roll back**: Before research starts, remove this newly created packet. After research starts, preserve command-owned artifacts and use the supported restart or archive lifecycle instead of deleting individual state files.
 <!-- /ANCHOR:adr-001-impl -->
 <!-- /ANCHOR:adr-001 -->
+
+<!-- ANCHOR:adr-002 -->
+## ADR-002: Surface as the create-diff nested sk-doc mode; rename engine to create-diff
+
+### Metadata
+
+| Field | Value |
+|-------|-------|
+| **Status** | Accepted |
+| **Date** | 2026-07-13 |
+| **Deciders** | User and Codex |
+
+### Context
+
+ADR-001 chose a portable core wrapped by ONE standalone OpenCode skill. The operator re-scoped the surface: the wrapper becomes a **nested `create-diff` child mode of the `sk-doc` parent hub** (sibling to create-skill/create-readme/create-flowchart), and the engine's npm identifier is renamed `document-diff` → `create-diff`.
+
+### Decision
+
+**We supersede only ADR-001's surface decision**: the "one standalone OpenCode skill" clause is replaced with a `create-diff` nested sk-doc mode. The surface is the `create-diff` nested sk-doc mode, registered in `sk-doc/mode-registry.json` + `sk-doc/hub-router.json`, and passing the three canon gates. The engine and mode are both named `create-diff`.
+
+The `research/**` synthesis is left intact as historical evidence; history is not rewritten, and spec-folder slugs stay historical.
+
+### Consequences
+
+The registered mode is advisor-routable once WS-1 lands, so it ships **preview-gated** (`SKILL.md` carries "preview — engine pending core phases 002–005") with conservative, specific aliases to avoid hijacking routing from functional siblings. The portable engine (phases 002–005) is unchanged in substance, only renamed.
+
+### Five Checks Evaluation
+
+| # | Check | Result | Evidence |
+|---|-------|--------|----------|
+| 1 | **Necessary?** | PASS | The nested sk-doc surface matches the operator's intended product boundary and the engine rename removes the old package identity. |
+| 2 | **Beyond Local Maxima?** | PASS | The decision preserves the portable core while comparing the standalone wrapper surface with the parent-hub mode topology. |
+| 3 | **Sufficient?** | PASS | Registration files, canon gates, preview gating, and conservative aliases define an implementable surface contract. |
+| 4 | **Fits Goal?** | PASS | A `create-diff` mode keeps local before-and-after review available through the sk-doc documentation hub. |
+| 5 | **Open Horizons?** | PASS | The portable engine remains reusable outside OpenCode, while future sk-doc siblings and adapters retain room to evolve. |
+
+**Checks Summary**: 5/5 PASS
+<!-- /ANCHOR:adr-002 -->

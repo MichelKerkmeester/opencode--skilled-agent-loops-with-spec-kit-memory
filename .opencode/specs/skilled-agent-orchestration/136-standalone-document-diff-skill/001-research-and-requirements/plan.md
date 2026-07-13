@@ -46,7 +46,7 @@ _memory:
 | Aspect | Value |
 |--------|-------|
 | **Workflow** | `system-deep-loop` research mode |
-| **Target** | Local document-diff core plus one standalone OpenCode skill |
+| **Target** | Local create-diff core plus one standalone OpenCode skill |
 | **Research State** | 30 command-owned iterations and a canonical synthesis exist; the delta/route-proof audit remains open |
 | **Primary Output** | `research/research.md` |
 | **Validation** | Spec Kit strict child and recursive parent validation |

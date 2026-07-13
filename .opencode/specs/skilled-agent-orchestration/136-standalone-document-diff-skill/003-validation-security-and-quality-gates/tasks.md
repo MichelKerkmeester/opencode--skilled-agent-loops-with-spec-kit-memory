@@ -1,6 +1,6 @@
 ---
 title: "Tasks: Validation, security, and quality gates"
-description: "Tasks for the document-diff fixture corpus, adversarial security tests, accessibility checks, license audit, and measured quality budgets."
+description: "Tasks for the create-diff fixture corpus, adversarial security tests, accessibility checks, license audit, and measured quality budgets."
 trigger_phrases:
   - "document diff validation tasks"
   - "document diff security tasks"
@@ -107,4 +107,3 @@ _memory:
 - **Research corpus**: `../001-research-and-requirements/research/research.md`
 - **Core consumer**: `../002-core-diff-and-snapshot-mvp/spec.md`
 <!-- /ANCHOR:cross-refs -->
-

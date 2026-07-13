@@ -1,6 +1,6 @@
 ---
 title: "Tasks: OpenCode skill wrapper and accessibility refinement"
-description: "Implementation queue for the standalone OpenCode wrapper, automatic edit capture, explicit fallback, and accessible review."
+description: "Implementation queue for the sk-doc `create-diff` nested mode wrapper, automatic edit capture, explicit fallback, and accessible review."
 trigger_phrases:
   - "OpenCode skill tasks"
   - "AI edit snapshot tasks"
@@ -56,8 +56,8 @@ _memory:
 
 - [ ] T001 Confirm phases 002 through 005 and phase 003 gates are ready
 - [ ] T002 Freeze public API, CLI, diagnostics, exit codes, and capability tiers
-- [ ] T003 Load sk-doc create-skill instructions and select the final skill slug
-- [ ] T004 Run the command-owned create-skill scaffold
+- [ ] T003 Load sk-doc create-skill instructions and confirm the `create-diff` mode name + registration files
+- [ ] T004 Scaffold and register `create-diff` under sk-doc (mode-registry.json + hub-router.json)
 - [ ] T005 Replace generated placeholders with the bounded orchestration contract
 <!-- /ANCHOR:phase-1 -->
 
@@ -87,7 +87,7 @@ _memory:
 <!-- ANCHOR:phase-3 -->
 ## Phase 3: Verification
 
-- [ ] T017 Run skill structure and reference validation
+- [ ] T017 Run parent-hub + create-diff mode canon validation (parent-skill-check, package_skill --check, frontmatter versions)
 - [ ] T018 Run automatic capture, after-edit review, interruption, and explicit-pair tests
 - [ ] T019 Compare direct and wrapped canonical and HTML output
 - [ ] T020 Run phase 003 hostile-input and zero-network gates

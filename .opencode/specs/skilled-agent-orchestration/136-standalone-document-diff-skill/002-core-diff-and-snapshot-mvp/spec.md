@@ -74,7 +74,7 @@ This is the first product implementation phase. It converts the phase 001 archit
 
 **Deliverables**:
 
-- Portable `document-diff` package skeleton and public core interfaces.
+- Portable `create-diff` package skeleton and public core interfaces.
 - Ordered canonical typed tree with deterministic hashes and fidelity diagnostics.
 - Plain-text and Markdown adapters.
 - Deterministic add, delete, and replacement diffing through jsdiff.
@@ -122,7 +122,7 @@ Deliver a portable MVP that compares text and Markdown locally and emits the sam
 
 | File Path | Change Type | Description |
 |-----------|-------------|-------------|
-| Future `document-diff` package root | Create | Portable TypeScript core, adapters, report renderer, and tests; exact repository path is selected at phase intake |
+| Future `create-diff` package root | Create | Portable TypeScript core, adapters, report renderer, and tests; exact repository path is selected at phase intake |
 | `../001-research-and-requirements/research/research.md` | Read only | Architecture and contract source; command-owned research artifacts remain untouched |
 <!-- /ANCHOR:scope -->
 
@@ -145,7 +145,7 @@ Deliver a portable MVP that compares text and Markdown locally and emits the sam
 
 | ID | Requirement | Acceptance Criteria |
 |----|-------------|---------------------|
-| REQ-006 | Expose the research-defined core API and initial CLI experience. | Public interfaces cover capture, compare, explicit compare, extraction, diff, and render; `npx document-diff compare file.md` is testable. |
+| REQ-006 | Expose the research-defined core API and initial CLI experience. | Public interfaces cover capture, compare, explicit compare, extraction, diff, and render; `npx create-diff compare file.md` is testable. |
 | REQ-007 | Support Node 22 and 24 with pinned dependencies. | CI and local tests pass on both supported runtime lines with a committed lockfile. |
 <!-- /ANCHOR:requirements -->
 
@@ -188,4 +188,3 @@ Deliver a portable MVP that compares text and Markdown locally and emits the sam
 
 - Research synthesis: `../001-research-and-requirements/research/research.md`
 - Validation and security phase: `../003-validation-security-and-quality-gates/spec.md`
-

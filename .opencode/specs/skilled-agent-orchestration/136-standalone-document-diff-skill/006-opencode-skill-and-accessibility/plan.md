@@ -44,13 +44,13 @@ _memory:
 | Aspect | Value |
 |--------|-------|
 | **Language/Stack** | Markdown skill contract plus minimal TypeScript or shell adapters where generated workflow permits |
-| **Framework** | OpenCode standalone skill wrapping the portable document-diff package |
+| **Framework** | sk-doc `create-diff` nested child mode wrapping the portable `create-diff` package |
 | **Storage** | Portable snapshot store only; the skill owns no separate persistence |
 | **Testing** | Skill validation, orchestration integration, report accessibility, and local-only network checks |
 
 ### Overview
 
-Use the repository create-skill workflow to generate a thin OpenCode package. Bind its edit workflow to the portable capture and compare contracts, preserve explicit-pair fallback, and finish report accessibility across every view and JavaScript mode.
+Use the repository create-skill workflow to generate and register a thin `create-diff` nested child mode under the sk-doc parent hub. Bind its edit workflow to the portable capture and compare contracts, preserve explicit-pair fallback, and finish report accessibility across every view and JavaScript mode.
 <!-- /ANCHOR:summary -->
 
 ---
@@ -62,12 +62,12 @@ Use the repository create-skill workflow to generate a thin OpenCode package. Bi
 
 - [ ] Phases 002 through 005 expose stable APIs, CLI commands, diagnostics, and exit codes.
 - [ ] Phase 003 gates pass for all required adapters and reports.
-- [ ] The sk-doc create-skill contract and templates are loaded at implementation intake.
+- [ ] The sk-doc create-skill contract, nested-mode templates, and registration requirements are loaded at implementation intake.
 - [ ] Automatic and explicit capture flows have testable OpenCode entry points.
 
 ### Definition of Done
 
-- [ ] Skill validation and wrapper integration tests pass.
+- [ ] Parent-hub and create-diff mode validation plus wrapper integration tests pass.
 - [ ] Capture-before-write ordering and after-edit review pass.
 - [ ] Direct and wrapped output remain equivalent.
 - [ ] Automated and manual accessibility checks pass with JavaScript on and off.
@@ -104,7 +104,7 @@ The skill identifies an authorized target, checks capability, invokes portable c
 | Surface | Current Role | Action | Verification |
 |---------|--------------|--------|--------------|
 | Portable API and CLI | Own all product behavior | Freeze and consume unchanged | Direct versus wrapped equivalence tests |
-| OpenCode skill | New orchestration surface | Add triggers, ordering, fallback, and guidance | Skill validation and workflow tests |
+| sk-doc create-diff mode | New orchestration surface | Add mode triggers, ordering, fallback, guidance, and hub registration | Parent-hub, mode, and workflow validation tests |
 | Report templates | Present changes | Refine semantics and accessibility only | Automated plus manual accessibility matrix |
 | Snapshot lifecycle | Stores before states | Consume status and cleanup contract | Error mapping and dry-run tests |
 <!-- /ANCHOR:affected-surfaces -->
@@ -117,7 +117,7 @@ The skill identifies an authorized target, checks capability, invokes portable c
 ### Phase 1: Setup
 
 - [ ] Freeze portable commands, schemas, diagnostics, and capability messages.
-- [ ] Run sk-doc create-skill with the selected local slug and package boundary.
+- [ ] Scaffold `create-diff` under sk-doc via create-skill and register it in mode-registry.json + hub-router.json.
 - [ ] Replace generated placeholders with the approved workflow contract.
 
 ### Phase 2: Implementation

@@ -192,7 +192,7 @@
     ],
     "causal_summary": "Rich document extraction can hide changes, manufacture noise, or execute hostile content",
     "created_at": "2026-07-13T14:01:36Z",
-    "last_save_at": "2026-07-13T14:19:12.394Z",
+    "last_save_at": "2026-07-13T17:55:59.379Z",
     "save_lineage": "graph_only",
     "last_accessed_at": null,
     "source_docs": [
@@ -201,11 +201,11 @@
       "tasks.md",
       "implementation-summary.md"
     ],
-    "source_fingerprint": "sha256:1ce6dd289b0187243cdbd577298955d9f394caff03c75290818643ee2f6cd76c",
+    "source_fingerprint": "sha256:481514ab98d73a687cb222e4ba8341b308bf395040390cdf98d6a762becf9070",
     "source_doc_hashes": {
-      "spec.md": "a1d017720b1f8799f4e96f7f9f4d10f78d56d5d75020e6c6b56f326297d03b2d",
+      "spec.md": "e9a19157b67e33a9c92933045c5c717ec5b253045e78b5a4edf3cbbbb8e0673e",
       "plan.md": "3403ff33196ec24ed982c346981ddd92b2856a5444c6b70245eaa49078bf2567",
-      "tasks.md": "fb5a58ee8256f114899bc120bc1d837aeb50ca8cd9c86e378b52748f04b6c22e",
+      "tasks.md": "d045ad38c98b6f71b57ae31ce7330e2d0027df55af3f3ff2ef2e32c8ad953315",
       "implementation-summary.md": "231c6a18e21297bb462d8f48b4d7faa59a5e63a04aa77e914a370e824232c162"
     },
     "last_active_child_id": null,

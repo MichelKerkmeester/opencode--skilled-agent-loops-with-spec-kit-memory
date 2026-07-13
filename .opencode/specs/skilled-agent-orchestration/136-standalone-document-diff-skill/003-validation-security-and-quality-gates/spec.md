@@ -120,7 +120,7 @@ Create the evidence system that proves the diff is useful, local, secure, access
 
 | File Path | Change Type | Description |
 |-----------|-------------|-------------|
-| Future `document-diff` fixture and test roots | Create | Corpus, expected outputs, security battery, accessibility checks, performance harness, and license audit |
+| Future `create-diff` fixture and test roots | Create | Corpus, expected outputs, security battery, accessibility checks, performance harness, and license audit |
 | Future package configuration and CI | Create/Modify | Supported runtimes, test matrices, audit commands, and thresholds |
 <!-- /ANCHOR:scope -->
 
@@ -188,4 +188,3 @@ Create the evidence system that proves the diff is useful, local, secure, access
 - Research corpus and budgets: `../001-research-and-requirements/research/research.md`
 - Core MVP: `../002-core-diff-and-snapshot-mvp/spec.md`
 - First gated rich adapters: `../004-html-docx-and-move-detection/spec.md`
-

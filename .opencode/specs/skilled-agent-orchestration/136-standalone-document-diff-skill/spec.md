@@ -1,6 +1,6 @@
 ---
-title: "Feature Specification: Standalone AI Document Diff Skill"
-description: "Phase parent for researching and defining a portable, local-first document diff workflow that does not depend on Git."
+title: "Feature Specification: AI Document Diff Engine and sk-doc Create-Diff Mode"
+description: "Phase parent for researching and defining a portable, local-first document diff engine surfaced through the sk-doc create-diff mode."
 trigger_phrases:
   - "standalone document diff skill"
   - "AI document before and after"
@@ -45,7 +45,7 @@ _memory:
   Detailed requirements, decisions, tasks, validation, and continuity live in child phases.
 -->
 
-# Feature Specification: Standalone AI Document Diff Skill
+# Feature Specification: AI Document Diff Engine and sk-doc Create-Diff Mode
 
 <!-- ANCHOR:metadata -->
 ## 1. METADATA
@@ -89,7 +89,7 @@ Define a local-first skill and portable core that automatically preserves a base
 - Research-backed implementation for plain text, Markdown, HTML, DOCX, and text PDFs, with explicit capability and fidelity tiers.
 - A deterministic typed document model, semantic and structural diffing, contextual move detection, and self-contained HTML review reports.
 - Automatic local snapshots, explicit before and after fallback, retention, cleanup, integrity, permissions, and cross-platform state handling.
-- A portable TypeScript API and CLI wrapped by one standalone OpenCode skill.
+- A portable TypeScript API and CLI provided by the create-diff engine, surfaced as the create-diff nested child mode of the sk-doc parent hub.
 - Fixture, security, privacy, accessibility, dependency, licensing, performance, and hostile-input gates.
 - Conditional scanned-document OCR only after a measured go or no-go decision.
 
@@ -109,7 +109,7 @@ Define a local-first skill and portable core that automatically preserves a base
 | `003-validation-security-and-quality-gates/` | Create | 003 | Fixture corpus and measurable security, CSP, license, accessibility, and performance gates |
 | `004-html-docx-and-move-detection/` | Create | 004 | Isolated HTML and DOCX adapters, richer report views, fidelity diagnostics, and move detection |
 | `005-pdf-cli-and-cross-platform-state/` | Create | 005 | Text-PDF support, portable CLI, and safe cross-platform snapshot lifecycle |
-| `006-opencode-skill-and-accessibility/` | Create | 006 | Standalone OpenCode wrapper, automatic edit capture, fallback, and accessibility refinement |
+| `006-opencode-skill-and-accessibility/` | Create | 006 | sk-doc create-diff nested child mode wrapper, automatic edit capture, fallback, and accessibility refinement |
 | `007-optional-ocr-adapter/` | Create conditionally | 007 | Decision-first local OCR adapter with pinned assets and resource bounds |
 <!-- /ANCHOR:scope -->
 
@@ -125,7 +125,7 @@ Define a local-first skill and portable core that automatically preserves a base
 | 3 | `003-validation-security-and-quality-gates/` | Fixture corpus, hostile inputs, CSP, licenses, accessibility, and performance thresholds | Draft; seed fixtures may start with phase 002 intake |
 | 4 | `004-html-docx-and-move-detection/` | Isolated HTML and DOCX adapters, contextual moves, side-by-side and fidelity views | Draft; gated by phase 003 |
 | 5 | `005-pdf-cli-and-cross-platform-state/` | Text PDFs, lifecycle CLI, atomic state, locks, retention, and platform controls | Draft; gated by phases 003 and 004 contracts |
-| 6 | `006-opencode-skill-and-accessibility/` | Thin OpenCode wrapper, automatic capture, explicit fallback, and accessibility refinement | Draft; gated by stable phases 002 through 005 |
+| 6 | `006-opencode-skill-and-accessibility/` | Thin sk-doc create-diff nested-mode wrapper, automatic capture, explicit fallback, and accessibility refinement | Draft; gated by stable phases 002 through 005 |
 | 7 | `007-optional-ocr-adapter/` | Offline OCR decision and optional bounded adapter | Conditional; go or no-go after phases 003 and 005 |
 
 ### Phase Transition Rules
@@ -146,7 +146,7 @@ Define a local-first skill and portable core that automatically preserves a base
 | Phase 002 core | Phase 003 full gates | Deterministic core, text and Markdown, unified report, and basic snapshots are fixture-testable | Phase 002 acceptance suite and seed corpus evidence |
 | Phase 003 gates | Phase 004 rich adapters | Hostile-input, CSP, license, accessibility, performance, and fixture gates pass | Recorded corpus results and phase 003 checklist evidence |
 | Phase 004 rich adapters | Phase 005 PDF and state | Adapter isolation, fidelity diagnostics, contextual moves, and report views are stable | HTML and DOCX fixture results plus direct contract tests |
-| Phase 005 portable surface | Phase 006 OpenCode skill | CLI, API, state lifecycle, capability messages, and exit codes are frozen | Three-platform CLI and lifecycle evidence |
+| Phase 005 portable surface | Phase 006 sk-doc create-diff mode | CLI, API, state lifecycle, capability messages, and exit codes are frozen | Three-platform CLI and lifecycle evidence |
 | Phases 003 and 005 | Phase 007 OCR decision | Accuracy, security, license, offline distribution, determinism, and resource evidence is complete | Recorded go or no-go decision against approved thresholds |
 <!-- /ANCHOR:phase-map -->
 
@@ -170,6 +170,6 @@ Define a local-first skill and portable core that automatically preserves a base
 - Validation gates: `003-validation-security-and-quality-gates/spec.md`
 - HTML, DOCX, and moves: `004-html-docx-and-move-detection/spec.md`
 - PDF, CLI, and state: `005-pdf-cli-and-cross-platform-state/spec.md`
-- OpenCode skill: `006-opencode-skill-and-accessibility/spec.md`
+- sk-doc create-diff mode: `006-opencode-skill-and-accessibility/spec.md`
 - Conditional OCR: `007-optional-ocr-adapter/spec.md`
 - Machine metadata: `description.json` and `graph-metadata.json`

@@ -1,0 +1,214 @@
+{
+  "schema_version": 1,
+  "packet_id": "skilled-agent-orchestration/136-standalone-document-diff-skill/003-validation-security-and-quality-gates",
+  "spec_folder": "skilled-agent-orchestration/136-standalone-document-diff-skill/003-validation-security-and-quality-gates",
+  "parent_id": "skilled-agent-orchestration/136-standalone-document-diff-skill",
+  "children_ids": [],
+  "manual": {
+    "depends_on": [],
+    "supersedes": [],
+    "related_to": []
+  },
+  "derived": {
+    "trigger_phrases": [
+      "document diff validation corpus",
+      "document diff security gate",
+      "document diff license audit",
+      "document diff performance budget",
+      "document diff quality gate plan",
+      "document diff security test plan",
+      "document diff validation tasks",
+      "document diff security tasks",
+      "document diff gate summary",
+      "document diff validation status"
+    ],
+    "key_topics": [
+      "document",
+      "diff",
+      "validation",
+      "corpus",
+      "security",
+      "gate",
+      "license",
+      "audit",
+      "performance",
+      "budget",
+      "quality",
+      "plan"
+    ],
+    "importance_tier": "critical",
+    "status": "draft",
+    "key_files": [
+      "spec.md",
+      "plan.md",
+      "tasks.md",
+      "implementation-summary.md"
+    ],
+    "entities": [
+      {
+        "name": "spec.md",
+        "kind": "doc",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
+        "name": "plan.md",
+        "kind": "doc",
+        "path": "plan.md",
+        "source": "derived"
+      },
+      {
+        "name": "tasks.md",
+        "kind": "doc",
+        "path": "tasks.md",
+        "source": "derived"
+      },
+      {
+        "name": "implementation-summary.md",
+        "kind": "doc",
+        "path": "implementation-summary.md",
+        "source": "derived"
+      },
+      {
+        "name": "Feature Specification",
+        "kind": "proper_noun",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
+        "name": "Parent Spec",
+        "kind": "proper_noun",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
+        "name": "Handoff Criteria",
+        "kind": "proper_noun",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
+        "name": "Phase Context This",
+        "kind": "proper_noun",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
+        "name": "Scope Boundary",
+        "kind": "proper_noun",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
+        "name": "Problem Statement Rich",
+        "kind": "proper_noun",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
+        "name": "Implementation Plan",
+        "kind": "proper_noun",
+        "path": "plan.md",
+        "source": "derived"
+      },
+      {
+        "name": "Technical Context",
+        "kind": "proper_noun",
+        "path": "plan.md",
+        "source": "derived"
+      },
+      {
+        "name": "Overview Define",
+        "kind": "proper_noun",
+        "path": "plan.md",
+        "source": "derived"
+      },
+      {
+        "name": "Pattern Shared",
+        "kind": "proper_noun",
+        "path": "plan.md",
+        "source": "derived"
+      },
+      {
+        "name": "Key Components",
+        "kind": "proper_noun",
+        "path": "plan.md",
+        "source": "derived"
+      },
+      {
+        "name": "Data Flow Fixtures",
+        "kind": "proper_noun",
+        "path": "plan.md",
+        "source": "derived"
+      },
+      {
+        "name": "Task Notation",
+        "kind": "proper_noun",
+        "path": "tasks.md",
+        "source": "derived"
+      },
+      {
+        "name": "Task Format",
+        "kind": "proper_noun",
+        "path": "tasks.md",
+        "source": "derived"
+      },
+      {
+        "name": "Run Node",
+        "kind": "proper_noun",
+        "path": "tasks.md",
+        "source": "derived"
+      },
+      {
+        "name": "Completion Criteria",
+        "kind": "proper_noun",
+        "path": "tasks.md",
+        "source": "derived"
+      },
+      {
+        "name": "Phase 1: Setup",
+        "kind": "heading",
+        "path": "tasks.md",
+        "source": "derived"
+      },
+      {
+        "name": "Phase 2: Implementation",
+        "kind": "heading",
+        "path": "tasks.md",
+        "source": "derived"
+      },
+      {
+        "name": "Implementation Summary",
+        "kind": "proper_noun",
+        "path": "implementation-summary.md",
+        "source": "derived"
+      },
+      {
+        "name": "Spec Folder",
+        "kind": "proper_noun",
+        "path": "implementation-summary.md",
+        "source": "derived"
+      }
+    ],
+    "causal_summary": "Rich document extraction can hide changes, manufacture noise, or execute hostile content",
+    "created_at": "2026-07-13T14:01:36Z",
+    "last_save_at": "2026-07-13T14:19:12.394Z",
+    "save_lineage": "graph_only",
+    "last_accessed_at": null,
+    "source_docs": [
+      "spec.md",
+      "plan.md",
+      "tasks.md",
+      "implementation-summary.md"
+    ],
+    "source_fingerprint": "sha256:1ce6dd289b0187243cdbd577298955d9f394caff03c75290818643ee2f6cd76c",
+    "source_doc_hashes": {
+      "spec.md": "a1d017720b1f8799f4e96f7f9f4d10f78d56d5d75020e6c6b56f326297d03b2d",
+      "plan.md": "3403ff33196ec24ed982c346981ddd92b2856a5444c6b70245eaa49078bf2567",
+      "tasks.md": "fb5a58ee8256f114899bc120bc1d837aeb50ca8cd9c86e378b52748f04b6c22e",
+      "implementation-summary.md": "231c6a18e21297bb462d8f48b4d7faa59a5e63a04aa77e914a370e824232c162"
+    },
+    "last_active_child_id": null,
+    "last_active_at": null
+  }
+}

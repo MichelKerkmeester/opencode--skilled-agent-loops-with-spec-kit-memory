@@ -195,7 +195,7 @@
     ],
     "causal_summary": "The deep-alignment skill shipped with its build phases but its authored docs drifted from the sk-doc `create-skill` templates",
     "created_at": "2026-07-13T11:01:03.072Z",
-    "last_save_at": "2026-07-14T07:42:51.904Z",
+    "last_save_at": "2026-07-14T06:52:35.587Z",
     "save_lineage": "graph_only",
     "last_accessed_at": null,
     "source_docs": [
@@ -211,7 +211,7 @@
       "plan.md": "e7be656f80cb48f49917a979b9f81eecfc008771ffa109dbadf60eb649bd8067",
       "tasks.md": "aa14a8a40f91f718678a7b2f25d58b0ef2781409a95d9d89d10885b17af2726f",
       "checklist.md": "78a4747f379000e6d5ea2fcb8db472c5367eaa6d23a9b5faad1a8e9197314783",
-      "implementation-summary.md": "9e8af746ecc0b18a154462c9390118932f024fe003f140677737af77af7ebc10"
+      "implementation-summary.md": "ab965a725112b963f4809183cb915d4f68b721caa54eef02409394e5dffa85d6"
     },
     "last_active_child_id": null,
     "last_active_at": null

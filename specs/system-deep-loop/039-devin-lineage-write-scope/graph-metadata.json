@@ -39,7 +39,7 @@
       "resume"
     ],
     "importance_tier": "important",
-    "status": "in_progress",
+    "status": "complete",
     "key_files": [
       "implementation-summary.md",
       "spec.md",
@@ -85,12 +85,6 @@
         "source": "derived"
       },
       {
-        "name": "In Progress",
-        "kind": "proper_noun",
-        "path": "spec.md",
-        "source": "derived"
-      },
-      {
         "name": "Parent Spec",
         "kind": "proper_noun",
         "path": "spec.md",
@@ -110,6 +104,12 @@
       },
       {
         "name": "Scope Boundary",
+        "kind": "proper_noun",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
+        "name": "Five Markdown",
         "kind": "proper_noun",
         "path": "spec.md",
         "source": "derived"
@@ -175,14 +175,14 @@
         "source": "derived"
       },
       {
-        "name": "hermetic",
+        "name": "resumed",
         "kind": "key_phrase",
         "path": "tasks.md",
         "source": "derived"
       },
       {
-        "name": "Phase 1: Setup",
-        "kind": "heading",
+        "name": "hermetic",
+        "kind": "key_phrase",
         "path": "tasks.md",
         "source": "derived"
       },
@@ -195,7 +195,7 @@
     ],
     "causal_summary": "Deep-loop fan-out lineages using the cli-devin executor, including GLM 5.2 max, failed terminally when a leaf wrote outside its bound lineage directory",
     "created_at": "2026-08-17T00:12:17.081Z",
-    "last_save_at": "2026-08-17T05:11:04.511Z",
+    "last_save_at": "2026-08-17T05:42:54.182Z",
     "save_lineage": "graph_only",
     "last_accessed_at": null,
     "source_docs": [
@@ -205,13 +205,13 @@
       "checklist.md",
       "implementation-summary.md"
     ],
-    "source_fingerprint": "sha256:717305a6f0a522f6c2afb496aa546864a2c7e31eeed27fc0c1286104cb4b47f3",
+    "source_fingerprint": "sha256:b7c585a014942fa7aaec85b8b933d6058c483a40b4200ccf2b8a2537e8781086",
     "source_doc_hashes": {
-      "spec.md": "226fbe2aeac40fc4ae41af3853ac145686fb6a1195ae2e16e1c782172550e728",
-      "plan.md": "86dfe0db45fb05720e689a04bc616679da4fa9a6af08dfb49603ed97f04b3150",
-      "tasks.md": "fb0ab4274a8391fd1699e8176a302e6a5396de32470c0a8db951868aecc4d4e5",
-      "checklist.md": "943fea437eb46dce2507509b6d06131b8caef1319731cac974af00a877e30c2d",
-      "implementation-summary.md": "d63dce86dba43b4123ebc11667508fab7291fe4fe068cef635a50cfbd1b576f4"
+      "spec.md": "acc7dcc11cd112f5413969565c9b9ba3a9ba5af8198460d619cecafae4ec34f5",
+      "plan.md": "e1578fad5cfaea1635eb7f2c8239a1c3d421e41e9bd0554b22fbaf8b31820eee",
+      "tasks.md": "c67660a4fa78edb372e09cd459695d65cb1d0bdeefb805014ce6d6f687afdb16",
+      "checklist.md": "63c600b9d1486aec3f1f858cc9d9296e590bbeb3b97456dbcfce912bec781dfb",
+      "implementation-summary.md": "0cccc7960483945731a2b79315da6763012cde3dee57fc44acaefbbecaad7c3c"
     },
     "last_active_child_id": null,
     "last_active_at": null

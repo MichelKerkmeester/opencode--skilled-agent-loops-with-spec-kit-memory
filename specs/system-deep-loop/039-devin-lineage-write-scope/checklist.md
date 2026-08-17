@@ -8,10 +8,10 @@ contextType: "implementation"
 _memory:
   continuity:
     packet_pointer: "specs/system-deep-loop/039-devin-lineage-write-scope"
-    last_updated_at: "2026-08-17T05:02:57.000Z"
+    last_updated_at: "2026-08-17T05:39:50.000Z"
     last_updated_by: "claude"
-    recent_action: "Added and unit-verified cli-devin session-resume-on-retry to the lineage runtime."
-    next_safe_action: "Run a free-tier glm-5-2 deep-review to confirm resumed turns produce the artifact."
+    recent_action: "Confirmed end-to-end: a free-tier glm-5-2 deep-review completed via resumed turns."
+    next_safe_action: "Optionally merge the isolated fanout-run.cjs fixes into the shared primary runtime."
     blockers: []
     key_files:
       - "specs/system-deep-loop/039-devin-lineage-write-scope/checklist.md"
@@ -21,10 +21,10 @@ _memory:
       fingerprint: "sha256:0000000000000000000000000000000000000000000000000000000000000000"
       session_id: "system-deep-loop-039-devin-lineage-write-scope"
       parent_session_id: null
-    completion_pct: 85
-    open_questions:
-      - "Does a free-tier glm-5-2 deep-review's resumed turns produce review-report.md end-to-end?"
-    answered_questions: []
+    completion_pct: 100
+    open_questions: []
+    answered_questions:
+      - "A free-tier glm-5-2 deep-review completed via resumed turns (succeeded:1, review-report.md produced) where 6 fresh restarts had failed."
 ---
 # Verification Checklist: Devin lineage write scope
 
@@ -77,7 +77,7 @@ _memory:
 - [x] CHK-025 [P0] No-session and probe-failure fall back to fresh. **Evidence**: the fallback and real-probe tests in `tests/unit/fanout-run.vitest.ts`.
 - [x] CHK-026 [P0] First attempt never resumes. **Evidence**: the attempt-1 test in `tests/unit/fanout-run.vitest.ts`.
 - [x] CHK-027 [P0] Full unit suite green. **Evidence**: `vitest run tests/unit/fanout-run.vitest.ts` → 106/106.
-- [ ] CHK-028 [P1] End-to-end free-tier resume proven. **Evidence**: PENDING — a `glm-5-2` deep-review's resumed turns persisting `review-report.md` not yet confirmed live.
+- [x] CHK-028 [P1] End-to-end free-tier resume proven. **Evidence**: e2e `orchestration-summary.json` → `succeeded:1, failed:0, salvage_miss:0`; attempt 3 (a captured `devin -c -p "Continue the review loop…"` dispatch) produced a 222-line `review-report.md` + `iterations/iteration-001..003.md`, vs the pre-fix negative control's 6 salvage-missed fresh restarts with empty `iterations/`.
 <!-- /ANCHOR:testing -->
 
 ---
@@ -128,6 +128,6 @@ _memory:
 <!-- ANCHOR:summary -->
 ## Verification Summary
 
-- [x] CHK-060 [P0] All checklist items marked `[x]` with evidence, except the single pending e2e item. **Evidence**: `checklist.md` CHK-001 through CHK-062 are `[x]`; only CHK-028 (live free-tier resume) is `[ ]` pending.
+- [x] CHK-060 [P0] All checklist items marked `[x]` with evidence. **Evidence**: `checklist.md` CHK-001 through CHK-062, including CHK-028 (live free-tier resume) after the e2e passed.
 - [x] CHK-062 [P0] Verified fixes are recorded without hand-generating metadata. **Evidence**: `implementation-summary.md`; `description.json` and `graph-metadata.json` are conductor-owned.
 <!-- /ANCHOR:summary -->

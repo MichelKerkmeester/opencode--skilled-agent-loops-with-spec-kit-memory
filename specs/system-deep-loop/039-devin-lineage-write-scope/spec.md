@@ -12,10 +12,10 @@ contextType: "implementation"
 _memory:
   continuity:
     packet_pointer: "specs/system-deep-loop/039-devin-lineage-write-scope"
-    last_updated_at: "2026-08-17T05:02:57.000Z"
+    last_updated_at: "2026-08-17T05:39:50.000Z"
     last_updated_by: "claude"
-    recent_action: "Added and unit-verified cli-devin session-resume-on-retry to the lineage runtime."
-    next_safe_action: "Run a free-tier glm-5-2 deep-review to confirm resumed turns produce the artifact."
+    recent_action: "Confirmed end-to-end: a free-tier glm-5-2 deep-review completed via resumed turns."
+    next_safe_action: "Optionally merge the isolated fanout-run.cjs fixes into the shared primary runtime."
     blockers: []
     key_files:
       - "specs/system-deep-loop/039-devin-lineage-write-scope/spec.md"
@@ -25,10 +25,10 @@ _memory:
       fingerprint: "sha256:0000000000000000000000000000000000000000000000000000000000000000"
       session_id: "system-deep-loop-039-devin-lineage-write-scope"
       parent_session_id: null
-    completion_pct: 85
-    open_questions:
-      - "Does a free-tier glm-5-2 deep-review's resumed turns produce review-report.md end-to-end?"
-    answered_questions: []
+    completion_pct: 100
+    open_questions: []
+    answered_questions:
+      - "A free-tier glm-5-2 deep-review completed via resumed turns (succeeded:1, review-report.md produced) where 6 fresh restarts had failed."
 ---
 <!-- SPECKIT_TEMPLATE_SOURCE: spec-core | v2.2 -->
 # Feature Specification: Devin lineage runtime fixes
@@ -51,13 +51,13 @@ FAILURE MODES:
 |-------|-------|
 | **Level** | 1 |
 | **Priority** | P0 |
-| **Status** | In Progress |
+| **Status** | Complete |
 | **Created** | 2026-08-17 |
 | **Branch** | `worktrees/012-sk-vision` |
 | **Parent Spec** | N/A - standard packet |
 | **Predecessor** | N/A |
 | **Successor** | N/A |
-| **Handoff Criteria** | Both runtime fixes (write scope + session resume) and their unit verification are recorded. The end-to-end free-tier `glm-5-2` deep-review confirmation and merging the isolated `fanout-run.cjs` into the shared primary runtime remain open. |
+| **Handoff Criteria** | Both runtime fixes (write scope + session resume) are recorded, unit-verified (106/106), and end-to-end confirmed: a free-tier `glm-5-2` deep-review completed via resumed turns. Merging the isolated `fanout-run.cjs` into the shared primary runtime remains a separate operator decision. |
 <!-- /ANCHOR:metadata -->
 
 ---
@@ -186,7 +186,7 @@ Record the verified fixes that (1) align Devin's OS sandbox write boundary with 
 - [x] Retry resumes the prior session. Evidence: `buildDevinLineageCommand` resume branch + the resume-on-retry test in `tests/unit/fanout-run.vitest.ts`.
 - [x] No-session and probe-failure fall back to a fresh start. Evidence: the fallback test + the real-probe test in `tests/unit/fanout-run.vitest.ts`.
 - [x] Resume behavior proven by tests. Evidence: `vitest run tests/unit/fanout-run.vitest.ts` → 106/106.
-- [ ] End-to-end: a free-tier `glm-5-2` deep-review's resumed turns produce `review-report.md`. Evidence: pending the e2e run.
+- [x] End-to-end: a free-tier `glm-5-2` deep-review's resumed turns produce `review-report.md`. Evidence: the e2e run's `orchestration-summary.json` reports `succeeded:1, failed:0, salvage_miss:0`; attempt 3 (a `devin -c` resume) wrote a 222-line `review-report.md` plus `iterations/iteration-001..003.md` and the full state set, where the pre-fix negative control salvage-missed 6 fresh restarts with an empty `iterations/`.
 <!-- /ANCHOR:success-criteria -->
 
 ---
@@ -209,7 +209,8 @@ Record the verified fixes that (1) align Devin's OS sandbox write boundary with 
 ### Answered Questions
 - **Q**: Is the shared primary runtime changed by this packet? **A**: No. The runtime edit is isolated to this worktree.
 - **Q**: Should retries use `-c` (continue) or `-r <session-id>` (resume specific)? **A**: `-c`. It is directory-scoped, and the write-scope fix already runs each lineage with cwd = its lineage dir, so continue is unambiguous under parallel lineages without the fragility of parsing and threading a session id.
+- **Q**: Do a free-tier `glm-5-2` deep-review's resumed turns accumulate to a persisted `review-report.md` end to end? **A**: Yes. The e2e run completed on attempt 3 (`succeeded:1`); the resumed leaf's own log confirmed it continued ("Resuming from where the previous turn stopped … I had completed context exploration").
 
 ### Open Questions
-- Does a free-tier `glm-5-2` deep-review's resumed turns accumulate to a persisted `review-report.md` end to end? (Unit behavior is proven; the live multi-turn run is pending.)
+- None. (Merging the isolated fix into the shared primary runtime is a separate operator decision, tracked as out of scope.)
 <!-- /ANCHOR:questions -->

@@ -9,10 +9,10 @@ contextType: "implementation"
 _memory:
   continuity:
     packet_pointer: "specs/system-deep-loop/039-devin-lineage-write-scope"
-    last_updated_at: "2026-08-17T05:02:57.000Z"
+    last_updated_at: "2026-08-17T05:39:50.000Z"
     last_updated_by: "claude"
-    recent_action: "Added and unit-verified cli-devin session-resume-on-retry to the lineage runtime."
-    next_safe_action: "Run a free-tier glm-5-2 deep-review to confirm resumed turns produce the artifact."
+    recent_action: "Confirmed end-to-end: a free-tier glm-5-2 deep-review completed via resumed turns."
+    next_safe_action: "Optionally merge the isolated fanout-run.cjs fixes into the shared primary runtime."
     blockers: []
     key_files:
       - "specs/system-deep-loop/039-devin-lineage-write-scope/tasks.md"
@@ -22,10 +22,10 @@ _memory:
       fingerprint: "sha256:0000000000000000000000000000000000000000000000000000000000000000"
       session_id: "system-deep-loop-039-devin-lineage-write-scope"
       parent_session_id: null
-    completion_pct: 85
-    open_questions:
-      - "Does a free-tier glm-5-2 deep-review's resumed turns produce review-report.md end-to-end?"
-    answered_questions: []
+    completion_pct: 100
+    open_questions: []
+    answered_questions:
+      - "A free-tier glm-5-2 deep-review completed via resumed turns (succeeded:1, review-report.md produced) where 6 fresh restarts had failed."
 ---
 <!-- SPECKIT_TEMPLATE_SOURCE: tasks-core | v2.2 -->
 # Tasks: Devin lineage runtime fixes
@@ -79,7 +79,7 @@ _memory:
 - [x] T008 Confirm the leaf still performs genuine research. Evidence: `implementation-summary.md` records the Cursor, Devin, and CLI-agnostic core findings.
 - [x] T009 Address the persistence follow-up. Evidence: `implementation-summary.md` records the resume fix targeting the free-tier `salvage_miss` cause.
 - [x] T013 Prove resume behavior with hermetic unit tests. Evidence: `vitest run tests/unit/fanout-run.vitest.ts` → 106/106, adding resume, fallback, attempt-1, and probe tests.
-- [ ] T014 Confirm end to end that a free-tier `glm-5-2` deep-review's resumed turns persist `review-report.md`. Evidence: pending the live run.
+- [x] T014 Confirm end to end that a free-tier `glm-5-2` deep-review's resumed turns persist `review-report.md`. Evidence: e2e `orchestration-summary.json` → `succeeded:1, failed:0, salvage_miss:0`; attempt 3 (a `devin -c` resume) produced a 222-line `review-report.md` + `iterations/iteration-001..003.md`.
 <!-- /ANCHOR:phase-3 -->
 
 ---
@@ -87,10 +87,10 @@ _memory:
 <!-- ANCHOR:completion -->
 ## Completion Criteria
 
-- [x] Code and unit tasks marked `[x]`. Evidence: `tasks.md` T001-T013.
-- [ ] End-to-end task T014 complete. Evidence: pending the free-tier `glm-5-2` deep-review run.
+- [x] All tasks marked `[x]`. Evidence: `tasks.md` T001-T014.
+- [x] End-to-end task T014 complete. Evidence: e2e `orchestration-summary.json` → `succeeded:1`.
 - [x] No `[B]` blocked tasks remaining. Evidence: `tasks.md` contains no blocked task entry.
-- [x] Unit and containment verification passed. Evidence: `implementation-summary.md` Verification table.
+- [x] Unit, containment, and end-to-end verification passed. Evidence: `implementation-summary.md` Verification table.
 <!-- /ANCHOR:completion -->
 
 ---

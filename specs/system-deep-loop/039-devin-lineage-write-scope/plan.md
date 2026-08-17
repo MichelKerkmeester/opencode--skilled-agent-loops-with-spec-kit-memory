@@ -10,10 +10,10 @@ contextType: "implementation"
 _memory:
   continuity:
     packet_pointer: "specs/system-deep-loop/039-devin-lineage-write-scope"
-    last_updated_at: "2026-08-17T05:02:57.000Z"
+    last_updated_at: "2026-08-17T05:39:50.000Z"
     last_updated_by: "claude"
-    recent_action: "Added and unit-verified cli-devin session-resume-on-retry to the lineage runtime."
-    next_safe_action: "Run a free-tier glm-5-2 deep-review to confirm resumed turns produce the artifact."
+    recent_action: "Confirmed end-to-end: a free-tier glm-5-2 deep-review completed via resumed turns."
+    next_safe_action: "Optionally merge the isolated fanout-run.cjs fixes into the shared primary runtime."
     blockers: []
     key_files:
       - "specs/system-deep-loop/039-devin-lineage-write-scope/plan.md"
@@ -23,10 +23,10 @@ _memory:
       fingerprint: "sha256:0000000000000000000000000000000000000000000000000000000000000000"
       session_id: "system-deep-loop-039-devin-lineage-write-scope"
       parent_session_id: null
-    completion_pct: 85
-    open_questions:
-      - "Does a free-tier glm-5-2 deep-review's resumed turns produce review-report.md end-to-end?"
-    answered_questions: []
+    completion_pct: 100
+    open_questions: []
+    answered_questions:
+      - "A free-tier glm-5-2 deep-review completed via resumed turns (succeeded:1, review-report.md produced) where 6 fresh restarts had failed."
 ---
 <!-- SPECKIT_TEMPLATE_SOURCE: plan-core | v2.2 -->
 # Implementation Plan: Devin lineage runtime fixes
@@ -70,7 +70,7 @@ Two coupled cli-devin runtime fixes. First, align Devin's OS sandbox with the ex
 
 ### Definition of Done
 - [x] Code + unit acceptance criteria met. Evidence: `implementation-summary.md` Verification table (106/106 unit).
-- [ ] End-to-end free-tier resume confirmed. Evidence: pending the `glm-5-2` deep-review run.
+- [x] End-to-end free-tier resume confirmed. Evidence: e2e `orchestration-summary.json` → `succeeded:1`.
 - [x] Docs updated (spec/plan/tasks/checklist/summary). Evidence: `spec.md`, `plan.md`, `tasks.md`, `checklist.md`, `implementation-summary.md`.
 <!-- /ANCHOR:quality-gates -->
 
@@ -127,7 +127,7 @@ Repository-root prompt construction -> absolute skill contract path -> cli-devin
 - [x] Pass Node syntax validation. Evidence: `node --check .opencode/skills/system-deep-loop/runtime/scripts/fanout-run.cjs`.
 - [x] Run one GLM-5.2-max / cli-devin research iteration. Evidence: `implementation-summary.md` Verification table.
 - [x] Pass the unit suite. Evidence: `vitest run tests/unit/fanout-run.vitest.ts` → 106/106.
-- [ ] Confirm end-to-end free-tier resume. Evidence: pending the `glm-5-2` deep-review run.
+- [x] Confirm end-to-end free-tier resume. Evidence: e2e `orchestration-summary.json` → `succeeded:1`; attempt 3 (a `devin -c` resume) produced `review-report.md`.
 <!-- /ANCHOR:phases -->
 
 ---
@@ -141,7 +141,7 @@ Repository-root prompt construction -> absolute skill contract path -> cli-devin
 | Containment | cli-devin lineage writes | GLM-5.2-max research iteration plus containment guard |
 | Unit | resume/fallback/attempt-gating/probe | `vitest run tests/unit/fanout-run.vitest.ts` → 106/106 |
 | Regression | non-cli-devin dispatch branch | conditional fallback to `process.cwd()` in `fanout-run.cjs` |
-| E2E (pending) | free-tier resumed turns persist `review-report.md` | `glm-5-2` deep-review run |
+| E2E (pass) | free-tier resumed turns persist `review-report.md` | `glm-5-2` deep-review run → `succeeded:1` |
 <!-- /ANCHOR:testing -->
 
 ---

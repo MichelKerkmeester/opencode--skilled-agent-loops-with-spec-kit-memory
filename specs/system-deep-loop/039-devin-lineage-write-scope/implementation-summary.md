@@ -9,10 +9,10 @@ contextType: "implementation"
 _memory:
   continuity:
     packet_pointer: "specs/system-deep-loop/039-devin-lineage-write-scope"
-    last_updated_at: "2026-08-17T05:02:57.000Z"
+    last_updated_at: "2026-08-17T05:39:50.000Z"
     last_updated_by: "claude"
-    recent_action: "Added and unit-verified cli-devin session-resume-on-retry to the lineage runtime."
-    next_safe_action: "Run a free-tier glm-5-2 deep-review to confirm resumed turns produce the artifact."
+    recent_action: "Confirmed end-to-end: a free-tier glm-5-2 deep-review completed via resumed turns."
+    next_safe_action: "Optionally merge the isolated fanout-run.cjs fixes into the shared primary runtime."
     blockers: []
     key_files:
       - "specs/system-deep-loop/039-devin-lineage-write-scope/implementation-summary.md"
@@ -22,10 +22,10 @@ _memory:
       fingerprint: "sha256:0000000000000000000000000000000000000000000000000000000000000000"
       session_id: "system-deep-loop-039-devin-lineage-write-scope"
       parent_session_id: null
-    completion_pct: 85
-    open_questions:
-      - "Does a free-tier glm-5-2 deep-review's resumed turns produce review-report.md end-to-end?"
-    answered_questions: []
+    completion_pct: 100
+    open_questions: []
+    answered_questions:
+      - "A free-tier glm-5-2 deep-review completed via resumed turns (succeeded:1, review-report.md produced) where 6 fresh restarts had failed."
 ---
 <!-- SPECKIT_TEMPLATE_SOURCE: impl-summary-core | v2.2 -->
 # Implementation Summary
@@ -40,10 +40,10 @@ _memory:
 | Field | Value |
 |-------|-------|
 | **Spec Folder** | 039-devin-lineage-write-scope |
-| **Status** | In Progress |
+| **Status** | Complete |
 | **Level** | 1 |
 
-Code and unit verification are done; the end-to-end free-tier resume run is the one remaining open item.
+Both runtime fixes are unit-verified (106/106) and end-to-end confirmed: a free-tier glm-5-2 deep-review completed via resumed turns.
 <!-- /ANCHOR:metadata -->
 
 ---
@@ -109,7 +109,9 @@ The session-resume fix threads the retry harness's `attempt` number into `buildL
 | no-session fallback test | A retry with no session builds a fresh `-p <full prompt>` |
 | attempt-1 test | The first attempt starts a fresh `-p` even when the probe reports an existing session |
 | real-probe test | `devinLineageSessionExists` returns false for an empty dir and an empty path |
-| e2e free-tier deep-review | PENDING — resumed turns producing `review-report.md` not yet confirmed live |
+| e2e free-tier deep-review | PASS — `orchestration-summary.json` reports `succeeded:1, failed:0, salvage_miss:0`; attempt 3 (a `devin -c` resume) produced a 222-line `review-report.md` + `iterations/iteration-001..003.md` + full state |
+| e2e negative control | Same config pre-fix: 6 fresh `-p` restarts, all `salvage_miss`, empty `iterations/`, 0 artifacts — isolating resume as the cause of the pass |
+| e2e resume-carries-context | Resumed leaf log: "Resuming from where the previous turn stopped … I had completed context exploration and was writing the init state files when the turn was interrupted" |
 | isolated blast radius | Worktree `fanout-run.cjs` + its unit test only; shared primary runtime unchanged |
 <!-- /ANCHOR:verification -->
 
@@ -118,7 +120,7 @@ The session-resume fix threads the retry harness's `attempt` number into `buildL
 <!-- ANCHOR:limitations -->
 ## KNOWN LIMITATIONS
 
-- The session-resume fix targets the free-tier accumulation cause of `salvage_miss` (short turns that never reach synthesis in one attempt). It is verified at the unit level only; the end-to-end confirmation that a free-tier `glm-5-2` deep-review's resumed turns actually persist `review-report.md` is still PENDING and is this packet's remaining open item.
+- The session-resume fix targets the free-tier accumulation cause of `salvage_miss` (short turns that never reach synthesis in one attempt). It is verified at the unit level (106/106) and end to end: a free-tier `glm-5-2` deep-review completed on attempt 3 (`succeeded:1`) via resumed turns, where the same config pre-fix salvage-missed 6 fresh restarts.
 - Resume relies on the write-scope fix's cwd invariant: `devin -c` is directory-scoped, so if a future change stops running each lineage in its own cwd, continue could pick up a sibling lineage's session. The two fixes are coupled by design.
 - The `.devin/hooks.v1.json` "mk devin hook could not resolve" message can appear when a devin session's `DEVIN_PROJECT_DIR`/cwd is not the repo root. It is a soft additionalContext string, not a hard failure, and the shared hooks file is intentionally left unchanged here; if it degrades live dispatches, the scoped fix is to set `DEVIN_PROJECT_DIR` in the devin dispatch env.
 - The runtime fixes exist only in this worktree's `fanout-run.cjs` and its unit test. The shared primary runtime is unchanged; merging remains a separate operator decision.

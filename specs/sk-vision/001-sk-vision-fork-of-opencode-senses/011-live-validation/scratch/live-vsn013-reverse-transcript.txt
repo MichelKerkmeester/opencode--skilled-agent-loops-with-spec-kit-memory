@@ -1,0 +1,2 @@
+{"id": 1, "result": {"loaded": true}, "_ms": 4424}
+{"id": 14, "result": {"type": "reverse", "query": "specs/sk-vision/001-sk-vision-fork-of-opencode-senses/009-manual-testing-playbook/scratch/fixture.png", "results": [{"provider": "local", "matches": [{"path": "specs/sk-vision/001-sk-vision-fork-of-opencode-senses/011-live-validation/scratch/fixture-b.png", "similarity": 1.0}], "scanned": 1}]}, "_ms": 0}

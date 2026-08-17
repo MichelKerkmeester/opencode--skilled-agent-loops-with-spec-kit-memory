@@ -1,0 +1,215 @@
+{
+  "schema_version": 1,
+  "packet_id": "sk-vision/001-sk-vision-fork-of-opencode-senses/011-live-validation",
+  "spec_folder": "sk-vision/001-sk-vision-fork-of-opencode-senses/011-live-validation",
+  "parent_id": "sk-vision/001-sk-vision-fork-of-opencode-senses",
+  "children_ids": [],
+  "manual": {
+    "depends_on": [],
+    "supersedes": [],
+    "related_to": []
+  },
+  "derived": {
+    "trigger_phrases": [
+      "sk-vision live validation",
+      "sk-vision full surface evidence",
+      "sk-vision remaining tools",
+      "sk-vision 011 tasks",
+      "sk-vision 011 checklist",
+      "sk-vision 011 summary"
+    ],
+    "key_topics": [
+      "sk-vision",
+      "live",
+      "validation",
+      "full",
+      "surface",
+      "evidence",
+      "remaining",
+      "tools",
+      "tasks",
+      "checklist",
+      "summary",
+      "skill"
+    ],
+    "importance_tier": "important",
+    "status": "complete",
+    "key_files": [
+      "spec.md",
+      "scratch/live-vsn001-inspect.outcome.json",
+      "implementation-summary.md",
+      "scratch/fixture-b.png",
+      "plan.md",
+      "tasks.md",
+      "checklist.md"
+    ],
+    "entities": [
+      {
+        "name": "spec.md",
+        "kind": "doc",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
+        "name": "live-vsn001-inspect.outcome.json",
+        "kind": "config",
+        "path": "scratch/live-vsn001-inspect.outcome.json",
+        "source": "derived"
+      },
+      {
+        "name": "implementation-summary.md",
+        "kind": "doc",
+        "path": "implementation-summary.md",
+        "source": "derived"
+      },
+      {
+        "name": "fixture-b.png",
+        "kind": "file",
+        "path": "scratch/fixture-b.png",
+        "source": "derived"
+      },
+      {
+        "name": "plan.md",
+        "kind": "doc",
+        "path": "plan.md",
+        "source": "derived"
+      },
+      {
+        "name": "tasks.md",
+        "kind": "doc",
+        "path": "tasks.md",
+        "source": "derived"
+      },
+      {
+        "name": "checklist.md",
+        "kind": "doc",
+        "path": "checklist.md",
+        "source": "derived"
+      },
+      {
+        "name": "Feature Specification",
+        "kind": "proper_noun",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
+        "name": "Parent Spec",
+        "kind": "proper_noun",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
+        "name": "Handoff Criteria",
+        "kind": "proper_noun",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
+        "name": "Phase Context This",
+        "kind": "proper_noun",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
+        "name": "Scope Boundary",
+        "kind": "proper_noun",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
+        "name": "Apple Silicon",
+        "kind": "proper_noun",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
+        "name": "Implementation Plan",
+        "kind": "proper_noun",
+        "path": "plan.md",
+        "source": "derived"
+      },
+      {
+        "name": "Technical Context",
+        "kind": "proper_noun",
+        "path": "plan.md",
+        "source": "derived"
+      },
+      {
+        "name": "Overview Read",
+        "kind": "proper_noun",
+        "path": "plan.md",
+        "source": "derived"
+      },
+      {
+        "name": "Pattern One",
+        "kind": "proper_noun",
+        "path": "plan.md",
+        "source": "derived"
+      },
+      {
+        "name": "Key Components",
+        "kind": "proper_noun",
+        "path": "plan.md",
+        "source": "derived"
+      },
+      {
+        "name": "Task Notation",
+        "kind": "proper_noun",
+        "path": "tasks.md",
+        "source": "derived"
+      },
+      {
+        "name": "Task Format",
+        "kind": "proper_noun",
+        "path": "tasks.md",
+        "source": "derived"
+      },
+      {
+        "name": "Completion Criteria",
+        "kind": "proper_noun",
+        "path": "tasks.md",
+        "source": "derived"
+      },
+      {
+        "name": "durable",
+        "kind": "key_phrase",
+        "path": "tasks.md",
+        "source": "derived"
+      },
+      {
+        "name": "one",
+        "kind": "key_phrase",
+        "path": "tasks.md",
+        "source": "derived"
+      },
+      {
+        "name": "concrete",
+        "kind": "key_phrase",
+        "path": "tasks.md",
+        "source": "derived"
+      }
+    ],
+    "causal_summary": "The skill exposes 13 public tools, but prior live evidence covered only VSN-002 `ocr` and VSN-012 `status`",
+    "created_at": "2026-08-16T15:10:09.328Z",
+    "last_save_at": "2026-08-17T00:03:36.749Z",
+    "save_lineage": "graph_only",
+    "last_accessed_at": null,
+    "source_docs": [
+      "spec.md",
+      "plan.md",
+      "tasks.md",
+      "checklist.md",
+      "implementation-summary.md"
+    ],
+    "source_fingerprint": "sha256:c37dcc9bff7fde95c1f90b1118f2e6be2e39b71933885ee47e4f884de047b51a",
+    "source_doc_hashes": {
+      "spec.md": "ac95b2ec10aca48a833e5cc230ec331e05b5f37ed09925c0240a8be1e44e57f8",
+      "plan.md": "5da4105c6997d379e949e52e8bda1963ea4d62faea459035591217691742156b",
+      "tasks.md": "d0e87c94cbe7cab4729ef199cf2f6e8319894402658f1b39f0e9fd177fbb3ee8",
+      "checklist.md": "89d6d687e8d9271eb6083a9fd39c08b847bf44cea058ab77941c8412deae5848",
+      "implementation-summary.md": "6fc380573ef02c44e7359b833b4d0393252ba50033e41806ee5a3354acbdcb56"
+    },
+    "last_active_child_id": null,
+    "last_active_at": null
+  }
+}

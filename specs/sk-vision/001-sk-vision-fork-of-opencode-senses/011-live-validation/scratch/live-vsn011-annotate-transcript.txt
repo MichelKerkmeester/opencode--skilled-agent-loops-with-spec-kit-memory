@@ -1,0 +1,2 @@
+{"id": 1, "result": {"loaded": true}, "_ms": 4424}
+{"id": 13, "result": {"type": "annotate", "path": "/Users/michelkerkmeester/.cache/sk-vision/annotations/1786892196740-6f54143c.png", "width": 480, "height": 140}, "_ms": 30}

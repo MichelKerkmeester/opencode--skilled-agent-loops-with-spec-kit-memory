@@ -1,0 +1,2 @@
+{"id": 1, "result": {"loaded": true}, "_ms": 4424}
+{"id": 11, "result": {"type": "colors", "palette": [{"hex": "#fefefe", "share": 0.945}, {"hex": "#010101", "share": 0.054}, {"hex": "#d4d4d4", "share": 0.0}, {"hex": "#a2a2a2", "share": 0.0}, {"hex": "#525252", "share": 0.0}], "buckets": {"dark": 0.053, "mid": 0.001, "bright": 0.945}, "avg_rgb": [244, 244, 244], "regions_analyzed": 1}, "_ms": 1}

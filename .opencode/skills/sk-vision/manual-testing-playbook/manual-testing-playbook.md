@@ -37,7 +37,7 @@ A scenario run is complete only after its `PASS`, `FAIL`, or `SKIP` outcome and 
 
 This playbook provides a derived census of deterministic scenarios across categories validating the `sk-vision` skill surface. The operator validator computes those counts from the walked tree; do not hand-maintain them. Each feature keeps its original ID and links to a dedicated feature file with the full execution contract.
 
-Coverage note (2026-08-16): 16 operator scenarios across 5 categories cover the 13 shipped `sk_vision_*` tools, the two host adapters (OpenCode plugin and Pi extension), and the JSON-RPC runtime lifecycle. Every scenario is executable against the local fork with the default `moondream2` model; nothing requires a network connection after the first model load.
+Coverage note (2026-08-16): the operator scenarios cover the 13 shipped `sk_vision_*` tools, native OpenCode and Pi adapters, the MCP stdio transport, Cursor and Devin attachment, and the JSON-RPC runtime lifecycle. Model-backed scenarios are executable against the local fork with the default `moondream2`; transport and status checks require no model load.
 
 ### Realistic Test Model
 
@@ -75,7 +75,7 @@ printf '%s\n' \
 | "$HOME/.cache/sk-vision/venv/bin/python" -
 ```
 
-6. Host adapters present: `.opencode/plugins/sk-vision.js` (OpenCode) and `.pi/extensions/sk-vision.ts` (Pi) exist and load; the 13 tool names are `sk_vision_inspect`, `sk_vision_detect`, `sk_vision_point`, `sk_vision_ocr`, `sk_vision_status`, `sk_vision_segment`, `sk_vision_metadata`, `sk_vision_crop`, `sk_vision_zoom`, `sk_vision_colors`, `sk_vision_diff`, `sk_vision_annotate`, `sk_vision_reverse`.
+6. Host adapters present: `.opencode/plugins/sk-vision.js` (OpenCode), `.pi/extensions/sk-vision.ts` (Pi), `.cursor/mcp.json` (Cursor), and `.devin/mcp_config.json` (Devin) exist; the MCP configs launch `.opencode/skills/sk-vision/vision-runtime/dist/mcp-server.js`. The 13 underlying tool names are `sk_vision_inspect`, `sk_vision_detect`, `sk_vision_point`, `sk_vision_ocr`, `sk_vision_status`, `sk_vision_segment`, `sk_vision_metadata`, `sk_vision_crop`, `sk_vision_zoom`, `sk_vision_colors`, `sk_vision_diff`, `sk_vision_annotate`, `sk_vision_reverse`.
 7. Destructive scenarios: none in this playbook; no scenario deletes cache or model state permanently. `unload` (VSN-016) frees GPU memory only and is immediately reversible via `load`.
 
 ---
@@ -466,18 +466,71 @@ Desired user-visible outcome: the GPU is claimed and released on demand.
 
 ---
 
-## 12. AUTOMATED TEST CROSS-REFERENCE
+## 12. MCP HOST TRANSPORT (`VSN-017..VSN-019`)
+
+### VSN-017 | Standalone MCP server
+
+#### Description
+Verify the built MCP stdio server launches with Node and returns exactly 13 tools from `tools/list`.
+
+#### Scenario Contract
+Prompt: `Launch the sk-vision MCP server directly and confirm it advertises all 13 tools.`
+
+An official MCP client starts the built process over stdio and records the returned count and names without loading model weights.
+
+Desired user-visible outcome: confirmation that the standalone server is healthy and exposes the complete tool surface.
+
+#### Test Execution
+> **Feature File:** [VSN-017](host-adapters/mcp-standalone.md)
+> **Catalog:** [mcp-transport](../feature-catalog/host-adapters/mcp-transport.md)
+
+### VSN-018 | Cursor MCP attachment
+
+#### Description
+Verify `.cursor/mcp.json` preserves existing servers, launches `sk-vision`, and exposes the tools in Cursor.
+
+#### Scenario Contract
+Prompt: `Confirm Cursor attaches the repository's sk-vision MCP server and can call its status tool.`
+
+The operator validates the merged JSON, reloads Cursor's MCP configuration, and calls `sk_vision_status` through the attached server.
+
+Desired user-visible outcome: Cursor reports `sk-vision` connected and returns a status response from the shared runtime.
+
+#### Test Execution
+> **Feature File:** [VSN-018](host-adapters/cursor-mcp.md)
+> **Catalog:** [mcp-transport](../feature-catalog/host-adapters/mcp-transport.md)
+
+### VSN-019 | Devin MCP attachment
+
+#### Description
+Verify `.devin/mcp_config.json` attaches `sk-vision` and exposes Devin's namespaced tools.
+
+#### Scenario Contract
+Prompt: `Confirm Devin attaches the repository's sk-vision MCP server and can call its namespaced status tool.`
+
+The operator validates the project JSON, restarts the Devin session, and calls `mcp__sk-vision__sk_vision_status`.
+
+Desired user-visible outcome: Devin reports the MCP server attached and returns a status response through the expected namespace.
+
+#### Test Execution
+> **Feature File:** [VSN-019](host-adapters/devin-mcp.md)
+> **Catalog:** [mcp-transport](../feature-catalog/host-adapters/mcp-transport.md)
+
+---
+
+## 13. AUTOMATED TEST CROSS-REFERENCE
 
 | Test Module | Coverage | Playbook Overlap |
 |---|---|---|
 | `vision-runtime/python/runtime.test.ts` | NDJSON analysis handlers: metadata, crop, colors, diff, annotate, hash_search, zoom; bbox validation; missing-file `INVALID_INPUT` | VSN-002, VSN-006, VSN-007, VSN-008, VSN-009, VSN-010, VSN-011, VSN-013 |
 | `vision-runtime/src/providers/photon.test.ts` | Content-type mapping, URL-extension fallback, normalized bbox parsing | VSN-014, VSN-009 |
+| `vision-runtime/src/mcp/server.test.ts` | Official-client MCP initialization, exact 13-tool inventory, and status call without model weights | VSN-017, VSN-018, VSN-019 |
 
-The automated suite runs with `bun test` inside `vision-runtime/` (8 tests, 27 expect calls). It proves handler-level behavior with synthetic PNGs but does not load the model; the playbook scenarios add real-model integration coverage.
+The automated suite runs with `bun test` inside `vision-runtime/` (9 tests, 36 expect calls). It proves handler-level behavior with synthetic PNGs plus the MCP list/status protocol without loading the model; the model-backed playbook scenarios add real inference coverage.
 
 ---
 
-## 13. FEATURE CATALOG CROSS-REFERENCE INDEX
+## 14. FEATURE CATALOG CROSS-REFERENCE INDEX
 
 | Feature ID | Feature Name | Category | Feature File |
 |---|---|---|---|
@@ -497,3 +550,6 @@ The automated suite runs with `bun test` inside `vision-runtime/` (8 tests, 27 e
 | VSN-014 | OpenCode plugin | Host adapters | [VSN-014](host-adapters/opencode-plugin.md) |
 | VSN-015 | Pi extension | Host adapters | [VSN-015](host-adapters/pi-extension.md) |
 | VSN-016 | Runtime lifecycle | Runtime core | [VSN-016](runtime-core/runtime-lifecycle.md) |
+| VSN-017 | Standalone MCP server | Host adapters | [VSN-017](host-adapters/mcp-standalone.md) |
+| VSN-018 | Cursor MCP attachment | Host adapters | [VSN-018](host-adapters/cursor-mcp.md) |
+| VSN-019 | Devin MCP attachment | Host adapters | [VSN-019](host-adapters/devin-mcp.md) |

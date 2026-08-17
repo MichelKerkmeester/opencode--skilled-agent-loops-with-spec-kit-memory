@@ -19,9 +19,18 @@ await Bun.build({
   },
 });
 
+// Keep the MCP transport independently launchable without changing the plugin entry.
+await Bun.build({
+  entrypoints: [resolve(root, "src/mcp/server.ts")],
+  outdir: dist,
+  target: "bun",
+  format: "esm",
+  naming: "mcp-server.[ext]",
+});
+
 // Ship the Python runtime alongside so the plugin can find it without the repo.
 const pyDist = resolve(dist, "python");
 await mkdir(pyDist, { recursive: true });
 await cp(runtime, resolve(pyDist, "runtime.py"));
 
-console.log("built dist/plugin.js + dist/python/runtime.py");
+console.log("built dist/plugin.js + dist/mcp-server.js + dist/python/runtime.py");

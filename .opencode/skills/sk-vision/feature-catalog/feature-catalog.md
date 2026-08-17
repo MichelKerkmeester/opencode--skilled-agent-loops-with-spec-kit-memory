@@ -17,7 +17,7 @@ This document combines the current feature inventory for the `sk-vision` system 
 
 ## 1. OVERVIEW
 
-Use this catalog as the canonical inventory for the live `sk-vision` feature surface. The numbered sections below group the system by capability area so readers can move from a top-level summary into per-feature reference files without losing implementation or validation context. sk-vision is a local-first vision skill: a Moondream-backed JSON-RPC runtime exposes 13 `sk_vision_*` tools to text-only coding models through an OpenCode plugin and a Pi extension.
+Use this catalog as the canonical inventory for the live `sk-vision` feature surface. The numbered sections below group the system by capability area so readers can move from a top-level summary into per-feature reference files without losing implementation or validation context. sk-vision is a local-first vision skill: a Moondream-backed JSON-RPC runtime exposes 13 `sk_vision_*` tools through native OpenCode and Pi adapters plus an MCP stdio transport used by Cursor and Devin.
 
 ---
 
@@ -266,6 +266,22 @@ A relative symlink from `.pi/extensions/sk-vision.ts` to the skill's factory reg
 #### Source Files
 
 See [`host-adapters/pi-extension.md`](host-adapters/pi-extension.md) for full implementation and test file listings.
+
+---
+
+### MCP stdio transport (sk-vision-mcp)
+
+#### Description
+
+Exposes all 13 sk-vision tools through one shared MCP stdio server used by Cursor and Devin.
+
+#### Current Reality
+
+The built `dist/mcp-server.js` entry reuses the canonical tool registry and shared runtime path. Cursor launches it from `.cursor/mcp.json`; Devin launches the same process from `.devin/mcp_config.json` and presents tools as `mcp__sk-vision__<tool>`.
+
+#### Source Files
+
+See [`host-adapters/mcp-transport.md`](host-adapters/mcp-transport.md) for full implementation, host configuration, and validation file listings.
 
 ---
 

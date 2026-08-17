@@ -1,0 +1,2 @@
+{"id": 1, "result": {"loaded": true}, "_ms": 4424}
+{"id": 7, "error": {"code": "INVALID_INPUT", "message": "task 'segment' is not supported by model 'moondream2': Model does not include a segment template"}, "_ms": 0}

@@ -1,0 +1,2 @@
+{"id": 1, "result": {"loaded": true}, "_ms": 2893}
+{"id": 2, "result": {"type": "point", "points": [{"x": 0.0938720703125, "y": 0.42236328125, "confidence": null}]}, "_ms": 244}

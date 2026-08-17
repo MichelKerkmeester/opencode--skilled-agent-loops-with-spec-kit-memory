@@ -1,0 +1,20 @@
+{
+  "scenarioId": "VSN-007",
+  "verdict": "PASS",
+  "reason": "Diff received two valid sources and returned the documented shape; fixture-b is an intentional copy, so changed_pct=0.0 and regions=[] are correct.",
+  "stage": "routing",
+  "evidence": ["specs/sk-vision/001-sk-vision-fork-of-opencode-senses/011-live-validation/scratch/live-vsn007-diff-transcript.txt"],
+  "executionContext": {
+    "command": "load + diff source=<FIXTURE> other=<FIXTURE_B> describe=false over NDJSON runtime stdin",
+    "runtime": "python",
+    "runtimeVersion": "3.12.11",
+    "evidenceClass": "adapter-driven",
+    "requireDurableEvidence": true,
+    "payloadFixture": "specs/sk-vision/001-sk-vision-fork-of-opencode-senses/009-manual-testing-playbook/scratch/fixture.png",
+    "secondaryFixture": "specs/sk-vision/001-sk-vision-fork-of-opencode-senses/011-live-validation/scratch/fixture-b.png",
+    "executor": "ndjson-runtime-stdin",
+    "executorObserved": true,
+    "model": "moondream2",
+    "modelObserved": true
+  }
+}

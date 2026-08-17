@@ -1,0 +1,2 @@
+{"id": 1, "result": {"loaded": true}, "_ms": 4424}
+{"id": 8, "result": {"type": "metadata", "width": 480, "height": 140, "format": "PNG", "mode": "RGB", "dpi": null, "exif": {}, "bytes": 1284}, "_ms": 0}

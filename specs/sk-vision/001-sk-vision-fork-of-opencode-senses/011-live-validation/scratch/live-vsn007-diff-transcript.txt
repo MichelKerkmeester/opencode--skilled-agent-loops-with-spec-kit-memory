@@ -1,0 +1,2 @@
+{"id": 1, "result": {"loaded": true}, "_ms": 4424}
+{"id": 12, "result": {"type": "diff", "changed_pct": 0.0, "regions": [], "width": 480, "height": 140}, "_ms": 2}

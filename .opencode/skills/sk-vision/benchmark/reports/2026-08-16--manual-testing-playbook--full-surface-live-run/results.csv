@@ -1,0 +1,12 @@
+scenario_id,hub_id,tier,stage,class_kind,gold_mode,provider_model,variant,score,verdict,reason
+VSN-001,sk-vision,,routing,manual,,moondream2,inspect-live-run,,PASS,"caption, scene, and ocr each returned the expected result type with non-empty text"
+VSN-003,sk-vision,,routing,manual,,moondream2,detect-live-run,,PASS,"bounded retry with target 'word' returned one normalized bounding box"
+VSN-004,sk-vision,,routing,manual,,moondream2,point-live-run,,PASS,"target 'word' returned one normalized point in the 0..1 range"
+VSN-005,sk-vision,,routing,manual,,moondream2,segment-live-run,,SKIP,"moondream2 does not include a segment template; segment is Moondream 3-only"
+VSN-006,sk-vision,,routing,manual,,moondream2,colors-live-run,,PASS,"returned palette, luminance buckets, average RGB, and regions_analyzed"
+VSN-007,sk-vision,,routing,manual,,moondream2,diff-live-run,,PASS,"two valid identical sources returned changed_pct 0.0 in the documented diff shape"
+VSN-008,sk-vision,,routing,manual,,moondream2,metadata-live-run,,PASS,"returned PNG, 480x140, RGB, and 1284 bytes matching the fixture"
+VSN-009,sk-vision,,routing,manual,,moondream2,crop-live-run,,PASS,"returned an existing 240x70 half-image artifact and matching bbox_px"
+VSN-010,sk-vision,,routing,manual,,moondream2,zoom-live-run,,PASS,"returned an existing 960x280 artifact at scale 2.0"
+VSN-011,sk-vision,,routing,manual,,moondream2,annotate-live-run,,PASS,"returned an existing 480x140 annotated artifact"
+VSN-013,sk-vision,,routing,manual,,moondream2,reverse-live-run,,PASS,"local provider scanned one image and matched fixture-b at similarity 1.0"

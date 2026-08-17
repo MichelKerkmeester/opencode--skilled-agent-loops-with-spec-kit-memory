@@ -1,0 +1,2 @@
+{"id": 1, "result": {"loaded": true}, "_ms": 4424}
+{"id": 9, "result": {"type": "crop", "path": "/Users/michelkerkmeester/.cache/sk-vision/crops/1786892196702-0c2743a1.png", "width": 240, "height": 70, "bbox_px": [0, 0, 240, 70]}, "_ms": 5}

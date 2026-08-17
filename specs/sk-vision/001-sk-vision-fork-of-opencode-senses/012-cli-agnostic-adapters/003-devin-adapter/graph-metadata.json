@@ -1,0 +1,214 @@
+{
+  "schema_version": 1,
+  "packet_id": "sk-vision/001-sk-vision-fork-of-opencode-senses/012-cli-agnostic-adapters/003-devin-adapter",
+  "spec_folder": "sk-vision/001-sk-vision-fork-of-opencode-senses/012-cli-agnostic-adapters/003-devin-adapter",
+  "parent_id": "sk-vision/001-sk-vision-fork-of-opencode-senses/012-cli-agnostic-adapters",
+  "children_ids": [],
+  "manual": {
+    "depends_on": [],
+    "supersedes": [],
+    "related_to": []
+  },
+  "derived": {
+    "trigger_phrases": [
+      "Devin sk-vision MCP adapter",
+      "Devin vision tools",
+      ".devin mcp config sk-vision",
+      "Devin sk-vision MCP adapter plan",
+      "Devin sk-vision MCP adapter tasks",
+      "Devin sk-vision MCP adapter checklist",
+      "Devin sk-vision MCP adapter summary"
+    ],
+    "key_topics": [
+      "devin",
+      "sk-vision",
+      "mcp",
+      "adapter",
+      "vision",
+      "tools",
+      "config",
+      "plan",
+      "tasks",
+      "checklist",
+      "summary",
+      "repo-local"
+    ],
+    "importance_tier": "important",
+    "status": "complete",
+    "key_files": [
+      "implementation-summary.md",
+      "spec.md",
+      "plan.md",
+      "tasks.md",
+      "checklist.md"
+    ],
+    "entities": [
+      {
+        "name": "implementation-summary.md",
+        "kind": "doc",
+        "path": "implementation-summary.md",
+        "source": "derived"
+      },
+      {
+        "name": "spec.md",
+        "kind": "doc",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
+        "name": "plan.md",
+        "kind": "doc",
+        "path": "plan.md",
+        "source": "derived"
+      },
+      {
+        "name": "tasks.md",
+        "kind": "doc",
+        "path": "tasks.md",
+        "source": "derived"
+      },
+      {
+        "name": "checklist.md",
+        "kind": "doc",
+        "path": "checklist.md",
+        "source": "derived"
+      },
+      {
+        "name": "Feature Specification",
+        "kind": "proper_noun",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
+        "name": "Parent Spec",
+        "kind": "proper_noun",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
+        "name": "Handoff Criteria",
+        "kind": "proper_noun",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
+        "name": "Phase Context The",
+        "kind": "proper_noun",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
+        "name": "Scope Boundary",
+        "kind": "proper_noun",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
+        "name": "Problem Statement Devin",
+        "kind": "proper_noun",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
+        "name": "Implementation Plan",
+        "kind": "proper_noun",
+        "path": "plan.md",
+        "source": "derived"
+      },
+      {
+        "name": "Create Devin",
+        "kind": "proper_noun",
+        "path": "plan.md",
+        "source": "derived"
+      },
+      {
+        "name": "Tool Namespace",
+        "kind": "proper_noun",
+        "path": "plan.md",
+        "source": "derived"
+      },
+      {
+        "name": "Test Type",
+        "kind": "proper_noun",
+        "path": "plan.md",
+        "source": "derived"
+      },
+      {
+        "name": "the",
+        "kind": "key_phrase",
+        "path": "plan.md",
+        "source": "derived"
+      },
+      {
+        "name": "1. SUMMARY",
+        "kind": "heading",
+        "path": "plan.md",
+        "source": "derived"
+      },
+      {
+        "name": "Task Notation",
+        "kind": "proper_noun",
+        "path": "tasks.md",
+        "source": "derived"
+      },
+      {
+        "name": "Task Format",
+        "kind": "proper_noun",
+        "path": "tasks.md",
+        "source": "derived"
+      },
+      {
+        "name": "Confirm Devin",
+        "kind": "proper_noun",
+        "path": "tasks.md",
+        "source": "derived"
+      },
+      {
+        "name": "Document Devin",
+        "kind": "proper_noun",
+        "path": "tasks.md",
+        "source": "derived"
+      },
+      {
+        "name": "Completion Criteria",
+        "kind": "proper_noun",
+        "path": "tasks.md",
+        "source": "derived"
+      },
+      {
+        "name": "Phase 1: Setup",
+        "kind": "heading",
+        "path": "tasks.md",
+        "source": "derived"
+      },
+      {
+        "name": "Verification Checklist",
+        "kind": "proper_noun",
+        "path": "checklist.md",
+        "source": "derived"
+      }
+    ],
+    "causal_summary": "Devin has no repo-local registration for the shipped sk-vision MCP process, so the 13 tools are not attached to project sessions",
+    "created_at": "2026-08-16T19:37:35.965Z",
+    "last_save_at": "2026-08-16T21:15:43.980Z",
+    "save_lineage": "graph_only",
+    "last_accessed_at": null,
+    "source_docs": [
+      "spec.md",
+      "plan.md",
+      "tasks.md",
+      "checklist.md",
+      "implementation-summary.md"
+    ],
+    "source_fingerprint": "sha256:085f754532f63d8b43c01aa077bba2596c33b13682948dc9f2f6eab1e787b203",
+    "source_doc_hashes": {
+      "spec.md": "3bdd951a7b35a86602c5f03c4b1fbac2855f6c4d8fde92c6865f513e9e041887",
+      "plan.md": "9c85c47951fd1a5e10bb753d0f442e459de9de19c3630276946dc2c6c9ab12c3",
+      "tasks.md": "b37c487b298cdd494058384abffb2706621112e18de17522a33b04417c89dfad",
+      "checklist.md": "fcdd1a94e307db4ec3c54613a5d1e4c8e687d9e465d055f301e553d51dcbeddd",
+      "implementation-summary.md": "83440cf0272be8e8db1f366a38567c546db3e272cb6298ae1a0ff469c9e43fee"
+    },
+    "last_active_child_id": null,
+    "last_active_at": null
+  }
+}

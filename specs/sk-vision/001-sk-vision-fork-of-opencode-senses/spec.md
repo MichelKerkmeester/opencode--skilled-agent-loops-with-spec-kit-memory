@@ -11,10 +11,10 @@ contextType: "implementation"
 _memory:
   continuity:
     packet_pointer: "sk-vision/001-sk-vision-fork-of-opencode-senses"
-    last_updated_at: "2026-08-16T08:35:00.000Z"
+    last_updated_at: "2026-08-17T00:03:36.000Z"
     last_updated_by: "cursor-grok"
-    recent_action: "006-010 amendment complete; all gates green."
-    next_safe_action: "Commit when the operator asks (nothing committed yet)."
+    recent_action: "006-011 amendment complete; remaining tool surface proven live."
+    next_safe_action: "Commit when the operator asks; nothing committed yet."
     blockers: []
     key_files:
       - "spec.md"
@@ -28,6 +28,7 @@ _memory:
       - "008-feature-catalog/spec.md"
       - "009-manual-testing-playbook/spec.md"
       - "010-quality-gate/spec.md"
+      - "011-live-validation/spec.md"
       - "context/README.md"
     session_dedup:
       fingerprint: "sha256:0000000000000000000000000000000000000000000000000000000000000000"
@@ -39,7 +40,7 @@ _memory:
       - "001-research is a one-shot Level 3 research child, not a deep-research loop."
       - "The parent stays a lean trio; context/ remains the upstream dump."
       - "002-005 are phase parents; nested L1 children hold implementer copy packs."
-      - "006-010 close the standards drift; no npm publishing (publishConfig removed)."
+      - "006-011 close the standards drift and live-evidence gap; no npm publishing (publishConfig removed)."
 ---
 <!-- SPECKIT_TEMPLATE_SOURCE: spec-core | v2.2 -->
 
@@ -71,7 +72,7 @@ _memory:
 | **Parent Packet** | `sk-vision` |
 | **Predecessor** | None |
 | **Successor** | None |
-| **Handoff Criteria** | `001-research` Complete. Nested children under `002-005` Complete. `006-010` amendment Complete: real SKILL.md contract, package hygiene, Pi `input.images`, feature catalog, manual testing playbook, and a green quality gate. Next: commit when the operator asks. |
+| **Handoff Criteria** | `001-research` Complete. Nested children under `002-006` Complete. Leaf phases `007-011` Complete: Pi `input.images`, feature catalog, manual testing playbook, quality gate, and live evidence for all 13 public tools (12 PASS overall, segment SKIP on moondream2 with a named blocker). Conductor metadata generation and validation remain the final handoff. |
 <!-- /ANCHOR:metadata -->
 
 ---
@@ -96,8 +97,8 @@ Deliver `sk-vision` as a standalone skill that owns a host-agnostic vision runti
 ### In Scope
 - Upstream dump under `context/` as the fork source (OpenCode Senses v0.2.0, default `moondream2`)
 - Research lock in `001-research/` (Complete)
-- Later children, created only after the prior child closes: standalone skill, in-skill runtime fork, OpenCode plugin load path, Pi extension load path
-- Amendment `006-010` (only after 002-005 shipped): contract realignment (SKILL.md, README, references, package hygiene), Pi `input.images` auto-inspect parity, canonical feature catalog, manual testing playbook + benchmark scaffold, final quality gate
+- Completed children for the standalone skill, in-skill runtime fork, OpenCode plugin load path, and Pi extension load path
+- Completed amendment `006-011`: contract realignment (SKILL.md, README, references, package hygiene), Pi `input.images` auto-inspect parity, canonical feature catalog, manual testing playbook + benchmark reports, quality gate, and whole-surface live validation
 - Dual-host vision for text-only models: OCR, inspect, detect, and the other shipped image tools, via one JSON-RPC core
 
 ### Out of Scope
@@ -147,6 +148,8 @@ Summary of aggregate file scope. Per-phase detail lives in the Phase Documentati
 | `.opencode/skills/sk-vision/feature-catalog/**` | Create | 008-feature-catalog | Canonical capability inventory |
 | `.opencode/skills/sk-vision/manual-testing-playbook/**` | Create | 009-manual-testing-playbook | Operator scenario corpus |
 | `.opencode/skills/sk-vision/benchmark/**` | Create | 009-manual-testing-playbook | Run-index scaffold (`reports/README.md`) |
+| `011-live-validation/**` | Create | 011-live-validation | Remaining-tool live transcripts, outcomes, and Level-2 closeout suite |
+| `.opencode/skills/sk-vision/benchmark/reports/2026-08-16--manual-testing-playbook--full-surface-live-run/**` | Create | 011-live-validation | Aggregate 10 PASS / 1 SKIP / 0 FAIL report |
 <!-- /ANCHOR:scope -->
 
 ---
@@ -156,11 +159,11 @@ Summary of aggregate file scope. Per-phase detail lives in the Phase Documentati
 
 > This spec uses phased decomposition. Each phase is an independently executable child spec folder. All implementation details (plan, tasks, checklist, decisions, continuity) live inside the phase children. This parent stays a lean trio: `spec.md`, `description.json`, `graph-metadata.json`.
 
-**Directory status:** `001-research/` is Complete. `002-skill-scaffold/`, `003-runtime-fork/`, `004-opencode-adapter/`, `005-pi-adapter/`, and `006-skill-contract-realignment/` are phase parents. Each has nested Level 1 children that hold the implementer copy packs. `007-pi-input-images/`, `008-feature-catalog/`, `009-manual-testing-playbook/`, and `010-quality-gate/` are leaf phases with their own suites. Do not implement from this parent or from a mid-level parent spec.
+**Directory status:** Phases `001` through `012` are Complete. `012-cli-agnostic-adapters/` is a phase parent whose nested Level-2 children (001-mcp-server-transport, 002-cursor-adapter, 003-devin-adapter, 004-catalog-and-playbook) are Complete. `002-skill-scaffold/`, `003-runtime-fork/`, `004-opencode-adapter/`, `005-pi-adapter/`, and `006-skill-contract-realignment/` are phase parents whose nested Level 1 children are Complete. `001-research/`, `007-pi-input-images/`, `008-feature-catalog/`, `009-manual-testing-playbook/`, `010-quality-gate/`, and `011-live-validation/` are complete leaf phases with their own suites. No implementation phase is active.
 
-**Amendment context (006-010):** 002-005 shipped and passed their gates (build, tests, GPU load smoke, plugin re-export, Pi dry factory), but the shipped skill drifted from sk-create-skill standards: `SKILL.md` is still the scaffold stub that says the runtime "lands in later children", `README.md` repeats the stale stub framing, `references/` is empty, `feature-catalog/` and `manual-testing-playbook/` (+ `benchmark/`) do not exist, `vision-runtime/package.json` still carries upstream provenance and a live `publishConfig`, a 22MB `.venv` residue sits in `vision-runtime/`, and the Pi `input.images` auto-inspect gap is recorded but unwired. `SKILL.md` also fails `validate_document.py --type skill` (4 blocking errors). 006-010 close every one of these.
+**Amendment context (006-011):** 002-005 shipped before standards and evidence gaps were found. Phases 006-010 closed the contract, package-hygiene, Pi input, catalog, playbook, and conformance gaps. Phase 011 then exercised the eleven tools that lacked live evidence: 10 PASS, segment SKIP on the default moondream2 checkpoint with the exact missing-template blocker, and 0 FAIL. Together with phase 009's OCR and status passes, every public tool now has an honest live verdict.
 
-**Small-model implementation order.** Do not skip nested children. Open the next Planned child's `spec.md` copy pack.
+**Small-model implementation order (completed).** This is the executed order. Every listed child or leaf is Complete; there is no next Planned child.
 
 1. `002-skill-scaffold/001-skill-md/spec.md` — SKILL.md and references stub.
 2. `002-skill-scaffold/002-metadata-and-manifests/spec.md` — Class S JSON, `--fix`, empty `vision-runtime/`.
@@ -178,6 +181,7 @@ Summary of aggregate file scope. Per-phase detail lives in the Phase Documentati
 14. `008-feature-catalog/spec.md` — feature-catalog package (root + categories + per-feature leaves).
 15. `009-manual-testing-playbook/spec.md` — manual-testing-playbook package + `benchmark/` scaffold.
 16. `010-quality-gate/spec.md` — every gate re-run, metadata reconciliation, stray-file sweep.
+17. `011-live-validation/spec.md` — live evidence for inspect, detect, point, segment, metadata, crop, zoom, colors, diff, annotate, and reverse.
 
 | Phase | Folder | Title / Focus | Level | Status |
 |-------|--------|---------------|-------|--------|
@@ -191,6 +195,8 @@ Summary of aggregate file scope. Per-phase detail lives in the Phase Documentati
 | 8 | `008-feature-catalog/` | Canonical feature catalog package | 2 | Complete |
 | 9 | `009-manual-testing-playbook/` | Operator scenario corpus + benchmark scaffold | 2 | Complete |
 | 10 | `010-quality-gate/` | Full conformance proof + metadata reconciliation | 2 | Complete |
+| 11 | `011-live-validation/` | Whole-surface live-model validation of the remaining tools | 2 | Complete |
+| 12 | `012-cli-agnostic-adapters/` | CLI-agnostic adapters: MCP-server transport + Cursor/Devin configs + multi-CLI catalog/playbook | Phase parent | Complete |
 
 **Nested children (implementer surface):**
 - **002:** `001-skill-md/`, `002-metadata-and-manifests/` — Level 1
@@ -199,7 +205,7 @@ Summary of aggregate file scope. Per-phase detail lives in the Phase Documentati
 - **005:** `001-extension-factory/`, `002-symlink-and-dry-factory/` — Level 1
 - **006:** `001-skill-md-and-readme/`, `002-package-hygiene/` — Level 1
 
-MCP/bash/skill-only Pi paths remain fallbacks inside 005, not a new child. Phases 006-010 are the standards-realignment amendment authorized after 002-005 shipped; they add doc-contract, hygiene, Pi input parity, catalog, playbook, and quality-gate work. No phase beyond 010 exists unless the operator opens a new packet.
+MCP/bash/skill-only Pi paths remain fallbacks inside 005, not a new child. Phases 006-011 are the completed standards-and-evidence amendment authorized after 002-005 shipped; they add doc-contract, hygiene, Pi input parity, catalog, playbook, quality-gate, and live-validation work. No phase beyond 011 exists unless the operator opens a new packet.
 
 Housing analog (confirmed): package lives inside the skill, matching `.opencode/skills/sk-communication/cli-communication-projection/`. Skill-root class S matrix (confirmed): author `SKILL.md`, `graph-metadata.json`, `leaf-manifest.config.json`; forbid `description.json`, `mode-registry.json`, `hub-router.json`, `command-metadata.json`; generate `leaf-manifest.json` and `leaf-aliases.json`.
 
@@ -271,7 +277,7 @@ Purpose: lock housing, fork baseline, and host adapters. Deliverables are on dis
 
 **Depends on.** `003-runtime-fork`. `004-opencode-adapter` is not a code dependency; run 005 after 004 so tool names and evidence tags stay aligned.
 
-### 006-skill-contract-realignment (Planned phase parent)
+### 006-skill-contract-realignment (Complete phase parent)
 
 **Purpose.** Bring the shipped skill into conformance with sk-create-skill standards: `SKILL.md` as the executable contract (not the scaffold stub), accurate `README.md`, a real `references/` corpus, and package hygiene in `vision-runtime/`.
 
@@ -281,42 +287,48 @@ Purpose: lock housing, fork baseline, and host adapters. Deliverables are on dis
 
 **Depends on.** 002-005 shipped (satisfied). `002-package-hygiene` depends on `001-skill-md-and-readme` only for manifest regeneration ordering; the two may otherwise be implemented in sequence without waiting.
 
-### 007-pi-input-images (Planned leaf phase)
+### 007-pi-input-images (Complete leaf phase)
 
 **Purpose.** Close the recorded P1 gap: Pi `on("input")` with `event.images` performs a bounded 2s-grace preload and injects sk-vision evidence via `action: "transform"`, mirroring the OpenCode `AttachmentInjector` so Pi users get the same auto-inspect behavior on attached images.
 
 **Depends on.** 005-pi-adapter (factory exists), 006 (docs reflect the change). Run after 006 so the skill contract documents the new hook in the same amendment.
 
-### 008-feature-catalog (Planned leaf phase)
+### 008-feature-catalog (Complete leaf phase)
 
 **Purpose.** Author the canonical `feature-catalog/` package per sk-create-feature-catalog: root catalog + category folders + one per-feature file per tool/runtime/adapter, each with source anchors and validation anchors. Categories: `scene-understanding/`, `pixel-analysis/`, `system-health/`, `host-adapters/`, `runtime-core/`.
 
 **Depends on.** 006 + 007 (catalog describes shipped behavior only).
 
-### 009-manual-testing-playbook (Planned leaf phase)
+### 009-manual-testing-playbook (Complete leaf phase)
 
 **Purpose.** Author the `manual-testing-playbook/` package per sk-create-manual-testing-playbook (root index + per-feature scenario files, feature IDs `VSN-001+`), scaffold the `benchmark/` run-index (`README.md` + `reports/README.md`), and run the operator-contract validator. Optional bounded live execution: run a subset of scenarios against the warm model cache and persist PASS/SKIP evidence through `run-manual-playbook-scenario.cjs`; SKIP with a named blocker is acceptable.
 
 **Depends on.** 008 (playbook cross-links catalog entries).
 
-### 010-quality-gate (Planned leaf phase)
+### 010-quality-gate (Complete leaf phase)
 
 **Purpose.** Prove perfect alignment: re-run every skill gate (`validate_skill_package.py`, `ci-skill-root-metadata.cjs`, `validate_document.py` on every authored doc, DQI via `extract_structure.py`, advisor smoke, `package_skill.py --check`), run `validate.sh --recursive --strict` on the whole packet, reconcile stale continuity metadata (002-001 completion, parent `last_active_child_id`), and sweep for stray files.
 
 **Depends on.** 006-009 complete.
 
+### 011-live-validation (Complete leaf phase)
+
+**Purpose.** Prove the eleven public tools not previously exercised live against the local moondream2 runtime. Preserve one raw transcript and outcome per tool, then publish a full-surface benchmark report. The observed result is 10 PASS, segment SKIP with the named missing-template blocker, and 0 FAIL.
+
+**Depends on.** 010-quality-gate complete; phase 009 fixture and warm local model cache available.
+
 ### Phase Transition Rules
 
-- `001`-`005` spec folders exist on disk and are Complete. Implement `006-skill-contract-realignment/001-skill-md-and-readme` next; do not start `007` until 006's gates are clean, and do not start `008` before `007`, `009` before `008`, or `010` before `009`.
-- Each nested child MUST pass `validate.sh --strict` independently before the next child's **implementation** starts.
+- `001`-`011` spec folders exist on disk and are Complete. No child implementation remains active.
+- Each nested child passed its applicable independent gate before the next child's implementation started; phase 011 structural checks are recorded for conductor validation on the main checkout.
 - Parent spec tracks aggregate progress via this map. Mid-level 002-006 stay lean trios. Heavy plans, tasks, checklists, and ADRs stay in nested children.
-- Resume the active nested child: `/speckit:resume specs/sk-vision/001-sk-vision-fork-of-opencode-senses/006-skill-contract-realignment/001-skill-md-and-readme/` until that child closes.
-- Run `validate.sh --recursive --strict` on the parent after every child-phase status change.
+- There is no active nested child to resume. Resume phase 011 only for evidence review; otherwise resume the parent for conductor metadata generation and final validation.
+- The conductor runs `validate.sh --recursive --strict` on the main checkout after generating phase 011 metadata.
 - Do not download Hugging Face weights in 001 or 002. Optional GPU `load` smoke is `003-runtime-fork/004-gpu-smoke` only.
 - Do not add hub metadata on `.opencode/skills/sk-vision/`.
 - Do not publish as `opencode-senses`; 006-002 neutralizes the fork's `publishConfig` unless the operator explicitly wants npm publishing.
 - Skill owns source. `.opencode/plugins/` and `.pi/extensions/` are load paths only (OpenCode: real JS adapter file; Pi: relative symlink).
-- 006-010 must not modify `context/` and must not rewrite published child history; they amend forward.
+- 006-011 did not modify `context/` or rewrite published child history; they amended forward.
 
 ### Phase Handoff Criteria
 
@@ -329,9 +341,11 @@ Purpose: lock housing, fork baseline, and host adapters. Deliverables are on dis
 | 005-pi-adapter | Parent remaining work | Pi factory valid; symlink in `.pi/extensions/`; tools registered; optional `input.images` hook bounded | Nested 005 children `validate.sh --strict` exit 0; `pi --offline --approve` starts without extension fail-closed; then parent recursive `--strict` |
 | 006-skill-contract-realignment | 007-pi-input-images | SKILL.md is the real contract (tools, env vars, adapters, SUCCESS CRITERIA); README accurate; references corpus present; package.json neutralized; no `.venv`; tests hermetic; manifests regenerated | Nested 006 children `validate.sh --strict` exit 0; `validate_document.py --type skill` exit 0; `ci-skill-root-metadata.cjs` OK; `rg` sweep clean; `bun run build && bun test` pass |
 | 007-pi-input-images | 008-feature-catalog | Pi `on("input")` handler injects bounded evidence for `event.images`; README gap note removed; session-safe (never blocks, never raises) | `007` `validate.sh --strict` exit 0; `pi --offline --approve` exit 0; `rg 'on("input")'` present; `.pi/extensions/README.md` no longer claims the P1 gap |
-| 008-feature-catalog | 009-manual-testing-playbook | Root catalog + per-feature files with source and validation anchors; parity between root and leaves | `validate_catalog_package.cjs` exit 0; `validate_document.py` on root + leaves clean; `008` `validate.sh --strict` exit 0 |
+| 008-feature-catalog | 009-manual-testing-playbook | Root catalog + per-feature files with source and validation anchors; parity between root and leaves | `validate_catalog_package.py` exit 0; `validate_document.py` on root + leaves clean; `008` `validate.sh --strict` exit 0 |
 | 009-manual-testing-playbook | 010-quality-gate | Playbook root + per-feature scenarios; `benchmark/` run-index scaffold; deterministic prompts and PASS/FAIL/SKIP verdicts | `validate-playbook-package.cjs` exit 0; root `validate_document.py` clean; `009` `validate.sh --strict` exit 0 |
-| 010-quality-gate | Parent completion | All gates green; metadata reconciled (stale continuities fixed, `last_active_child_id` current); no stray files | `010` `validate.sh --strict` exit 0; parent `validate.sh --recursive --strict` exit 0; gate outputs recorded in `010` implementation-summary |
+| 010-quality-gate | 011-live-validation | All conformance gates green; metadata reconciled; fixture and local runtime available for remaining-tool proof | `010` gate evidence complete; phase 009 fixture present; warm moondream2 runtime loads on MPS |
+| 011-live-validation | 012-cli-agnostic-adapters | Remaining eleven tools have live transcripts and outcomes; every runnable tool passes; every SKIP names its blocker; aggregate report is coherent | 10 PASS, segment SKIP (`moondream2` missing segment template), 0 FAIL; eleven transcript/outcome pairs; seven-file aggregate report; conductor validation pending on main checkout |
+| 012-cli-agnostic-adapters | Parent completion | MCP transport exposes 13 tools; Cursor + Devin configs launch it; catalog + playbook cover multi-CLI | MCP server build+test green; `.cursor/mcp.json`/`.devin/mcp_config.json` launch verified; 012 subtree validates strict |
 <!-- /ANCHOR:phase-map -->
 
 ---
@@ -339,7 +353,7 @@ Purpose: lock housing, fork baseline, and host adapters. Deliverables are on dis
 <!-- ANCHOR:questions -->
 ## 4. OPEN QUESTIONS
 
-- None. All 006-010 open questions resolved at closeout: no npm publishing (publishConfig removed in 006-002), real-image proof recorded via 009's live runs (status + ocr reports in `benchmark/reports/`), and `references/` ships `runtime-reference.md`.
+- None. All 006-011 questions are resolved: no npm publishing; `references/` ships `runtime-reference.md`; phase 009 proved OCR and status; phase 011 gave the remaining eleven tools honest live verdicts, including the accepted segment SKIP on moondream2.
 <!-- /ANCHOR:questions -->
 
 ---

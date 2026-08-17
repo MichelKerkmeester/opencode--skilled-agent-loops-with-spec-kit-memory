@@ -1,0 +1,214 @@
+{
+  "schema_version": 1,
+  "packet_id": "sk-vision/001-sk-vision-fork-of-opencode-senses/012-cli-agnostic-adapters/004-catalog-and-playbook",
+  "spec_folder": "sk-vision/001-sk-vision-fork-of-opencode-senses/012-cli-agnostic-adapters/004-catalog-and-playbook",
+  "parent_id": "sk-vision/001-sk-vision-fork-of-opencode-senses/012-cli-agnostic-adapters",
+  "children_ids": [],
+  "manual": {
+    "depends_on": [],
+    "supersedes": [],
+    "related_to": []
+  },
+  "derived": {
+    "trigger_phrases": [
+      "sk-vision MCP catalog coverage",
+      "sk-vision Cursor Devin playbook",
+      "VSN-017 VSN-018 VSN-019",
+      "sk-vision MCP catalog and playbook plan",
+      "sk-vision MCP catalog and playbook tasks",
+      "sk-vision MCP catalog and playbook checklist",
+      "sk-vision MCP catalog and playbook summary"
+    ],
+    "key_topics": [
+      "sk-vision",
+      "mcp",
+      "catalog",
+      "coverage",
+      "cursor",
+      "devin",
+      "playbook",
+      "vsn-017",
+      "vsn-018",
+      "vsn-019",
+      "plan",
+      "tasks"
+    ],
+    "importance_tier": "important",
+    "status": "complete",
+    "key_files": [
+      "spec.md",
+      "plan.md",
+      "tasks.md",
+      "checklist.md",
+      "implementation-summary.md"
+    ],
+    "entities": [
+      {
+        "name": "spec.md",
+        "kind": "doc",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
+        "name": "plan.md",
+        "kind": "doc",
+        "path": "plan.md",
+        "source": "derived"
+      },
+      {
+        "name": "tasks.md",
+        "kind": "doc",
+        "path": "tasks.md",
+        "source": "derived"
+      },
+      {
+        "name": "checklist.md",
+        "kind": "doc",
+        "path": "checklist.md",
+        "source": "derived"
+      },
+      {
+        "name": "implementation-summary.md",
+        "kind": "doc",
+        "path": "implementation-summary.md",
+        "source": "derived"
+      },
+      {
+        "name": "Feature Specification",
+        "kind": "proper_noun",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
+        "name": "Cursor Devin",
+        "kind": "proper_noun",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
+        "name": "Parent Spec",
+        "kind": "proper_noun",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
+        "name": "Handoff Criteria",
+        "kind": "proper_noun",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
+        "name": "Phase Context The",
+        "kind": "proper_noun",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
+        "name": "Scope Boundary",
+        "kind": "proper_noun",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
+        "name": "Implementation Plan",
+        "kind": "proper_noun",
+        "path": "plan.md",
+        "source": "derived"
+      },
+      {
+        "name": "Test Type",
+        "kind": "proper_noun",
+        "path": "plan.md",
+        "source": "derived"
+      },
+      {
+        "name": "IDs",
+        "kind": "key_phrase",
+        "path": "plan.md",
+        "source": "derived"
+      },
+      {
+        "name": "1. SUMMARY",
+        "kind": "heading",
+        "path": "plan.md",
+        "source": "derived"
+      },
+      {
+        "name": "2. QUALITY GATES",
+        "kind": "heading",
+        "path": "plan.md",
+        "source": "derived"
+      },
+      {
+        "name": "Definition of Ready",
+        "kind": "heading",
+        "path": "plan.md",
+        "source": "derived"
+      },
+      {
+        "name": "Task Notation",
+        "kind": "proper_noun",
+        "path": "tasks.md",
+        "source": "derived"
+      },
+      {
+        "name": "Task Format",
+        "kind": "proper_noun",
+        "path": "tasks.md",
+        "source": "derived"
+      },
+      {
+        "name": "Add Cursor",
+        "kind": "proper_noun",
+        "path": "tasks.md",
+        "source": "derived"
+      },
+      {
+        "name": "Add Devin",
+        "kind": "proper_noun",
+        "path": "tasks.md",
+        "source": "derived"
+      },
+      {
+        "name": "Completion Criteria",
+        "kind": "proper_noun",
+        "path": "tasks.md",
+        "source": "derived"
+      },
+      {
+        "name": "Phase 1: Setup",
+        "kind": "heading",
+        "path": "tasks.md",
+        "source": "derived"
+      },
+      {
+        "name": "Verification Checklist",
+        "kind": "proper_noun",
+        "path": "checklist.md",
+        "source": "derived"
+      }
+    ],
+    "causal_summary": "The current-state inventory names only the native adapters, and the manual corpus has no operator contract for the universal MCP fallback or its two hosts",
+    "created_at": "2026-08-16T19:37:36.305Z",
+    "last_save_at": "2026-08-16T21:15:44.153Z",
+    "save_lineage": "graph_only",
+    "last_accessed_at": null,
+    "source_docs": [
+      "spec.md",
+      "plan.md",
+      "tasks.md",
+      "checklist.md",
+      "implementation-summary.md"
+    ],
+    "source_fingerprint": "sha256:0ae24c17eb46263c7bdcfccdeed30479a0a6b5f19bf72b489b0f0ff33ba116dd",
+    "source_doc_hashes": {
+      "spec.md": "7a8f0f27efbc607bbcd46de0f8072eca6e7a89823e121d3e082d48ae1b66faa9",
+      "plan.md": "5609235069df4179e61f80cf6ad0bf04127af05410baa99a43bd507dd63f6dd8",
+      "tasks.md": "f091281572355bc88f38ef64b9df7eeedc222a3c70308b0ef4a1dd37a21b39f0",
+      "checklist.md": "93751d8d0246a8f21d6aad37ad947a92aa05fdfc0bd7a685a772cf8d6a0e7c81",
+      "implementation-summary.md": "7c6038a2bdd2c8b1cc84d9fd5e2eb6bafba85ec3fbad10dd7e9cf65b1f4a73d0"
+    },
+    "last_active_child_id": null,
+    "last_active_at": null
+  }
+}

@@ -1,0 +1,2 @@
+{"id": 1, "result": {"loaded": true}, "_ms": 4424}
+{"id": 10, "result": {"type": "zoom", "path": "/Users/michelkerkmeester/.cache/sk-vision/zooms/1786892196705-7a38ad08.png", "width": 960, "height": 280, "scale": 2.0}, "_ms": 3}

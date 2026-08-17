@@ -1,0 +1,6 @@
+{"id": 1, "result": {"loaded": true}, "_ms": 4424}
+{"id": 5, "result": {"type": "detect", "objects": []}, "_ms": 407}
+{"id": 1, "result": {"loaded": true}, "_ms": 2691}
+{"id": 2, "result": {"type": "detect", "objects": []}, "_ms": 185}
+{"id": 3, "result": {"type": "detect", "objects": [{"x1": 0.054534912109375, "y1": 0.364959716796875, "x2": 0.129180908203125, "y2": 0.460235595703125, "confidence": null}]}, "_ms": 150}
+{"id": 4, "result": {"type": "detect", "objects": [{"x1": 0.0, "y1": 0.054931640625, "x2": 0.4276123046875, "y2": 0.946044921875, "confidence": null}, {"x1": 0.0, "y1": 0.077392578125, "x2": 0.91552734375, "y2": 0.968505859375, "confidence": null}]}, "_ms": 166}

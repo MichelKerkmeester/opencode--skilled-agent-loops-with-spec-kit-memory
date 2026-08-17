@@ -1,0 +1,4 @@
+{"id": 1, "result": {"loaded": true}, "_ms": 4424}
+{"id": 2, "result": {"type": "caption", "caption": "A"}, "_ms": 1843}
+{"id": 3, "result": {"type": "scene", "scene": "This is a centered black screenshot screenshot spot, displaying, displaying an error message \" message \"ERROR 42 42\" within a document."}, "_ms": 257}
+{"id": 4, "result": {"type": "ocr", "text": "ERROR\n\n 42 42"}, "_ms": 214}

@@ -45,7 +45,8 @@
       "spec.md",
       "plan.md",
       "tasks.md",
-      "checklist.md"
+      "checklist.md",
+      "handover.md"
     ],
     "entities": [
       {
@@ -76,6 +77,12 @@
         "name": "checklist.md",
         "kind": "doc",
         "path": "checklist.md",
+        "source": "derived"
+      },
+      {
+        "name": "handover.md",
+        "kind": "doc",
+        "path": "handover.md",
         "source": "derived"
       },
       {
@@ -185,17 +192,11 @@
         "kind": "key_phrase",
         "path": "tasks.md",
         "source": "derived"
-      },
-      {
-        "name": "Verification Checklist",
-        "kind": "proper_noun",
-        "path": "checklist.md",
-        "source": "derived"
       }
     ],
     "causal_summary": "Deep-loop fan-out lineages using the cli-devin executor, including GLM 5.2 max, failed terminally when a leaf wrote outside its bound lineage directory",
     "created_at": "2026-08-17T00:12:17.081Z",
-    "last_save_at": "2026-08-17T05:42:54.182Z",
+    "last_save_at": "2026-08-17T06:05:39.472Z",
     "save_lineage": "graph_only",
     "last_accessed_at": null,
     "source_docs": [
@@ -203,15 +204,17 @@
       "plan.md",
       "tasks.md",
       "checklist.md",
-      "implementation-summary.md"
+      "implementation-summary.md",
+      "handover.md"
     ],
-    "source_fingerprint": "sha256:b7c585a014942fa7aaec85b8b933d6058c483a40b4200ccf2b8a2537e8781086",
+    "source_fingerprint": "sha256:91c412a322010342ce24c526f4b875f696d49c7be0fe507dbd4ccd4fcd4ff869",
     "source_doc_hashes": {
-      "spec.md": "acc7dcc11cd112f5413969565c9b9ba3a9ba5af8198460d619cecafae4ec34f5",
-      "plan.md": "e1578fad5cfaea1635eb7f2c8239a1c3d421e41e9bd0554b22fbaf8b31820eee",
-      "tasks.md": "c67660a4fa78edb372e09cd459695d65cb1d0bdeefb805014ce6d6f687afdb16",
-      "checklist.md": "63c600b9d1486aec3f1f858cc9d9296e590bbeb3b97456dbcfce912bec781dfb",
-      "implementation-summary.md": "0cccc7960483945731a2b79315da6763012cde3dee57fc44acaefbbecaad7c3c"
+      "spec.md": "45a9f1fa35030eec5e963efe429d7c08c53a182d0ccc72551c9656b23ed234e3",
+      "plan.md": "6f42a2e50c105a759d34aa10321683bb56cf3549718957f99c91824894985ef5",
+      "tasks.md": "1f87bfb1173aef67c2d2a63b7872f87184c85ee47023ba876c0afb950988d2cd",
+      "checklist.md": "61f72e0a2f617c82220d1517137dac1713fab59aeab93455d21ce2abc599e052",
+      "implementation-summary.md": "b0eba4ebac3e6e50121d976cebf36625dfd04c0ca2d8e29c51fd7a3e54361726",
+      "handover.md": "2307b0fd51e56fd22adc80f55f4927f10e6c7c70dac937d5adb1db5bfadbd7c5"
     },
     "last_active_child_id": null,
     "last_active_at": null

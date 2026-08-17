@@ -1174,6 +1174,28 @@ function buildLoopPrompt(loopType, specFolder, lineageDir, sessionId, lineage, r
   ].join('\n');
 }
 
+// A short "finish what you started" nudge used only when a retry RESUMES the session the
+// first attempt already opened (see the cli-devin dispatch). It deliberately does not restate
+// the full setup: the session already holds the loop context, so restating it would invite the
+// leaf to restart from phase_init instead of continuing. It reuses the same artifact names,
+// write-scope boundary, and completion marker as buildLoopPrompt so a resumed leaf persists the
+// same way a first-attempt leaf does.
+function buildDevinResumePrompt(loopType, lineageDir, lineage) {
+  assertActiveFanoutLoopType(loopType);
+  const artifact = loopType === 'review' ? 'review-report.md' : 'research.md';
+  const stateFile = loopType === 'review' ? 'deep-review-state.jsonl' : 'deep-research-state.jsonl';
+  return [
+    `Continue the ${loopType} loop you already started in THIS session — do NOT restart it and do NOT`,
+    `re-read the setup from scratch. Resume exactly where the previous turn stopped and carry the loop`,
+    `to completion: finish phase_main_loop and phase_synthesis, then persist ${artifact} plus the`,
+    `per-iteration files (iterations/iteration-NNN.md and ${stateFile}).`,
+    `Write EVERY file inside ${lineageDir} and nowhere else — that directory is your entire write`,
+    `surface. You may read anywhere, but do NOT modify, create, or delete any file outside it, and do`,
+    `NOT run generate-context.js, validate.sh, or any git write/checkout/commit command.`,
+    `When ${artifact} exists and the loop is complete, output a single line: FANOUT_LINEAGE_COMPLETE:${lineage.label}`,
+  ].join('\n');
+}
+
 function buildNativeCommandInput(loopType, specFolder, lineageDir, lineage, options = {}) {
   assertActiveFanoutLoopType(loopType);
   const maxIterations = lineage.iterations || 12;
@@ -1921,7 +1943,29 @@ function buildDevinLineageCommand(lineage, prompt, resolvedSandbox, resolvedPerm
   //     to the sandbox scope (the working directory) at the OS level; "dangerous"
   //     is the honest label for that autonomous behavior.
   //   - full access uses "dangerous" WITHOUT --sandbox: autonomous and unconfined.
-  const args = ['-p', prompt, '--model', model];
+  // The retry harness re-runs the whole lineage worker on each attempt, so a naive retry
+  // re-dispatches a fresh `devin -p "<full prompt>"` that restarts the loop from phase_init.
+  // A low-capacity model takes very short turns and never reaches synthesis in one shot, so
+  // every fresh retry discards the prior turn's progress and the lineage never persists its
+  // artifact. On a retry we instead CONTINUE the session the first attempt opened so the short
+  // turns accumulate toward a completed loop. `devin -c` continues the most-recent session IN
+  // THE CURRENT DIRECTORY, and each lineage already runs with its cwd scoped to its own lineage
+  // dir, so continue stays unambiguous even when sibling lineages run in parallel. It is guarded
+  // by a session-existence probe: if the first attempt died before opening any session there is
+  // nothing to continue, so fall back to a fresh start. The probe is injectable for hermetic
+  // tests that cannot spawn a real devin.
+  const sessionProbe = typeof options.devinSessionProbe === 'function'
+    ? options.devinSessionProbe
+    : devinLineageSessionExists;
+  const resumeExisting = Number(options.attempt) > 1
+    && sessionProbe(options.lineageDir, options.env || process.env);
+  const effectivePrompt = resumeExisting
+    ? buildDevinResumePrompt(options.loopType, options.lineageDir, lineage)
+    : prompt;
+  const args = resumeExisting
+    ? ['-c', '-p', effectivePrompt, '--model', model]
+    : ['-p', effectivePrompt, '--model', model];
+  const promptArgIndex = resumeExisting ? 2 : 1;
   if (resolvedSandbox === 'danger-full-access') {
     args.push('--permission-mode', 'dangerous');
   } else if (resolvedSandbox === 'read-only') {
@@ -1934,8 +1978,8 @@ function buildDevinLineageCommand(lineage, prompt, resolvedSandbox, resolvedPerm
     command: 'devin',
     args,
     input: undefined,
-    prompt,
-    promptArgIndexes: [1],
+    prompt: effectivePrompt,
+    promptArgIndexes: [promptArgIndex],
     executableVersion: resolveExecutableVersion('devin', options),
     model,
     reasoningEffort: null,
@@ -2085,6 +2129,29 @@ function isDevinBinaryAvailable(env = process.env) {
     stdio: 'ignore',
   });
   return result.status === 0;
+}
+
+// Probe whether the given directory already holds a devin session that can be continued.
+// `devin list --format json` is directory-scoped and reads local session metadata only (no
+// model round-trip, sub-second), so this is a cheap guard on the resume path. Any failure —
+// binary/list error, empty or unparseable output — resolves to "no session" so the caller
+// falls back to a fresh dispatch rather than a `devin -c` that would fail with nothing to
+// continue. A short timeout keeps a wedged list from stalling command construction.
+function devinLineageSessionExists(lineageDir, env = process.env) {
+  if (!lineageDir) return false;
+  try {
+    const result = spawnSync('devin', ['list', '--format', 'json'], {
+      cwd: lineageDir,
+      env,
+      encoding: 'utf8',
+      timeout: 15000,
+    });
+    if (result.status !== 0 || !result.stdout) return false;
+    const sessions = JSON.parse(result.stdout);
+    return Array.isArray(sessions) && sessions.length > 0;
+  } catch {
+    return false;
+  }
 }
 
 function isPiBinaryAvailable(env = process.env) {
@@ -2377,6 +2444,7 @@ async function main() {
           convergenceThreshold,
           stopPolicy,
           researchTopic,
+          attempt,
         },
       );
 
@@ -2757,6 +2825,7 @@ module.exports = {
   isCursorBinaryAvailable,
   isDevinBinaryAvailable,
   isPiBinaryAvailable,
+  devinLineageSessionExists,
   buildLoopPrompt,
   findMaxIterationsPolicyViolation,
   isMaxIterationsStopReason,

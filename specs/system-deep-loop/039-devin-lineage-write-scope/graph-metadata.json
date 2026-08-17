@@ -14,10 +14,15 @@
       "Devin lineage write scope",
       "cli-devin containment violation",
       "fanout Devin sandbox cwd",
+      "Devin session resume on retry",
+      "cli-devin free tier accumulation",
       "cli-devin containment fix plan",
+      "Devin session resume plan",
       "Devin lineage write scope tasks",
+      "Devin session resume tasks",
       "Devin lineage write scope checklist",
-      "Devin lineage write scope summary"
+      "Devin lineage write scope summary",
+      "Devin session resume summary"
     ],
     "key_topics": [
       "devin",
@@ -30,11 +35,11 @@
       "fanout",
       "sandbox",
       "cwd",
-      "plan",
-      "tasks"
+      "session",
+      "resume"
     ],
     "importance_tier": "important",
-    "status": "complete",
+    "status": "in_progress",
     "key_files": [
       "implementation-summary.md",
       "spec.md",
@@ -80,6 +85,12 @@
         "source": "derived"
       },
       {
+        "name": "In Progress",
+        "kind": "proper_noun",
+        "path": "spec.md",
+        "source": "derived"
+      },
+      {
         "name": "Parent Spec",
         "kind": "proper_noun",
         "path": "spec.md",
@@ -104,12 +115,6 @@
         "source": "derived"
       },
       {
-        "name": "Five Markdown",
-        "kind": "proper_noun",
-        "path": "spec.md",
-        "source": "derived"
-      },
-      {
         "name": "Implementation Plan",
         "kind": "proper_noun",
         "path": "plan.md",
@@ -122,7 +127,7 @@
         "source": "derived"
       },
       {
-        "name": "Overview Align Devin",
+        "name": "Overview Two",
         "kind": "proper_noun",
         "path": "plan.md",
         "source": "derived"
@@ -170,13 +175,13 @@
         "source": "derived"
       },
       {
-        "name": "Phase 1: Setup",
-        "kind": "heading",
+        "name": "hermetic",
+        "kind": "key_phrase",
         "path": "tasks.md",
         "source": "derived"
       },
       {
-        "name": "Phase 2: Implementation",
+        "name": "Phase 1: Setup",
         "kind": "heading",
         "path": "tasks.md",
         "source": "derived"
@@ -190,7 +195,7 @@
     ],
     "causal_summary": "Deep-loop fan-out lineages using the cli-devin executor, including GLM 5.2 max, failed terminally when a leaf wrote outside its bound lineage directory",
     "created_at": "2026-08-17T00:12:17.081Z",
-    "last_save_at": "2026-08-17T00:12:17.081Z",
+    "last_save_at": "2026-08-17T05:11:04.511Z",
     "save_lineage": "graph_only",
     "last_accessed_at": null,
     "source_docs": [
@@ -200,13 +205,13 @@
       "checklist.md",
       "implementation-summary.md"
     ],
-    "source_fingerprint": "sha256:fdb68f34c7b70f437e76c71d464e25a8abba9a932916c4e7bfbb9dc942b1e47e",
+    "source_fingerprint": "sha256:717305a6f0a522f6c2afb496aa546864a2c7e31eeed27fc0c1286104cb4b47f3",
     "source_doc_hashes": {
-      "spec.md": "1229c38a0ea13609a193d504f12fcba62a18cd195c5c649ee0e68dd2e2e71a1d",
-      "plan.md": "263e9b2eeb63fd1fbd087d32895105a595da2edb18c4aa8fc400982031774444",
-      "tasks.md": "14beac334ce0a653eb66ea7c7fb95fe08eda7c55415751d39401850433308cdd",
-      "checklist.md": "749f562d7a08430055269c3a40501e6546029ab8a796c67bdb24b42ef8056b14",
-      "implementation-summary.md": "4059d3857b8334a2a361d5f87199a741149873e7448cecfe26ba7c7c9b00429f"
+      "spec.md": "226fbe2aeac40fc4ae41af3853ac145686fb6a1195ae2e16e1c782172550e728",
+      "plan.md": "86dfe0db45fb05720e689a04bc616679da4fa9a6af08dfb49603ed97f04b3150",
+      "tasks.md": "fb0ab4274a8391fd1699e8176a302e6a5396de32470c0a8db951868aecc4d4e5",
+      "checklist.md": "943fea437eb46dce2507509b6d06131b8caef1319731cac974af00a877e30c2d",
+      "implementation-summary.md": "d63dce86dba43b4123ebc11667508fab7291fe4fe068cef635a50cfbd1b576f4"
     },
     "last_active_child_id": null,
     "last_active_at": null

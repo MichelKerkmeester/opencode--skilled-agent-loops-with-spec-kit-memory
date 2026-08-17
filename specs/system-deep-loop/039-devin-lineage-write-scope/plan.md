@@ -1,33 +1,35 @@
 ---
-title: "Implementation Plan: Devin lineage write scope"
-description: "Record the two worktree-local fanout edits and their successful cli-devin containment verification."
+title: "Implementation Plan: Devin lineage runtime fixes"
+description: "Record the cli-devin lineage write-containment and session-resume fanout edits and their verification."
 trigger_phrases:
   - "Devin lineage write scope"
   - "cli-devin containment fix plan"
-  - "fanout Devin sandbox cwd"
+  - "Devin session resume plan"
 importance_tier: "important"
 contextType: "implementation"
 _memory:
   continuity:
     packet_pointer: "specs/system-deep-loop/039-devin-lineage-write-scope"
-    last_updated_at: "2026-08-17T00:12:16.000Z"
-    last_updated_by: "sol"
-    recent_action: "Recorded and verified the Devin lineage write-scope fix."
-    next_safe_action: "Decide whether to merge the isolated fanout-run.cjs fix into the primary runtime."
+    last_updated_at: "2026-08-17T05:02:57.000Z"
+    last_updated_by: "claude"
+    recent_action: "Added and unit-verified cli-devin session-resume-on-retry to the lineage runtime."
+    next_safe_action: "Run a free-tier glm-5-2 deep-review to confirm resumed turns produce the artifact."
     blockers: []
     key_files:
       - "specs/system-deep-loop/039-devin-lineage-write-scope/plan.md"
       - ".opencode/skills/system-deep-loop/runtime/scripts/fanout-run.cjs"
+      - ".opencode/skills/system-deep-loop/runtime/tests/unit/fanout-run.vitest.ts"
     session_dedup:
       fingerprint: "sha256:0000000000000000000000000000000000000000000000000000000000000000"
       session_id: "system-deep-loop-039-devin-lineage-write-scope"
       parent_session_id: null
-    completion_pct: 100
-    open_questions: []
+    completion_pct: 85
+    open_questions:
+      - "Does a free-tier glm-5-2 deep-review's resumed turns produce review-report.md end-to-end?"
     answered_questions: []
 ---
 <!-- SPECKIT_TEMPLATE_SOURCE: plan-core | v2.2 -->
-# Implementation Plan: Devin lineage write scope
+# Implementation Plan: Devin lineage runtime fixes
 
 <!-- SPECKIT_LEVEL: 1 -->
 <!--
@@ -53,7 +55,7 @@ FAILURE MODES:
 | **Testing** | Node syntax check plus one GLM-5.2-max / cli-devin research iteration |
 
 ### Overview
-Align Devin's OS sandbox with the existing lineage write boundary by changing only cli-devin subprocess cwd, then keep the leaf contract readable by making `skillFile` absolute. Record the already completed verification without expanding into the separate `salvage_miss` issue or primary-runtime integration.
+Two coupled cli-devin runtime fixes. First, align Devin's OS sandbox with the existing lineage write boundary by changing only cli-devin subprocess cwd, and keep the leaf contract readable by making `skillFile` absolute. Second, resume the prior session on retry (`devin -c` + a short nudge, guarded by a session-existence probe) so a low-capacity model's short turns accumulate instead of restarting — the free-tier cause behind the `salvage_miss` follow-up. Record the containment and unit verification; the live free-tier end-to-end confirmation remains open.
 <!-- /ANCHOR:summary -->
 
 ---
@@ -67,8 +69,9 @@ Align Devin's OS sandbox with the existing lineage write boundary by changing on
 - [x] Dependencies identified. Evidence: `spec.md` section 6.
 
 ### Definition of Done
-- [x] All acceptance criteria met. Evidence: `implementation-summary.md` Verification table.
-- [x] Docs updated (spec/plan/tasks). Evidence: `spec.md`, `plan.md`, and `tasks.md`.
+- [x] Code + unit acceptance criteria met. Evidence: `implementation-summary.md` Verification table (106/106 unit).
+- [ ] End-to-end free-tier resume confirmed. Evidence: pending the `glm-5-2` deep-review run.
+- [x] Docs updated (spec/plan/tasks/checklist/summary). Evidence: `spec.md`, `plan.md`, `tasks.md`, `checklist.md`, `implementation-summary.md`.
 <!-- /ANCHOR:quality-gates -->
 
 ---
@@ -95,8 +98,11 @@ Repository-root prompt construction -> absolute skill contract path -> cli-devin
 
 | Surface | Current Role | Action | Verification |
 |---------|--------------|--------|--------------|
-| `buildLoopPrompt` | Provides leaf contract path | resolve `skillFile` from repository root | `.opencode/skills/system-deep-loop/runtime/scripts/fanout-run.cjs:1089` |
-| lineage process spawn | Selects subprocess cwd | use `lineageDir` only for cli-devin | `.opencode/skills/system-deep-loop/runtime/scripts/fanout-run.cjs:2501` |
+| `buildLoopPrompt` | Provides leaf contract path | resolve `skillFile` from repository root | absolute `path.resolve(process.cwd(), ...)` |
+| lineage process spawn | Selects subprocess cwd | use `lineageDir` only for cli-devin | dispatch `cwd: lineage.kind === 'cli-devin' ? lineageDir : process.cwd()` |
+| `buildDevinLineageCommand` | Builds the devin argv | resume with `-c` on retry when a session exists | resume branch + `buildDevinResumePrompt` + `devinLineageSessionExists` |
+| lineage worker | Runs each attempt | thread `attempt` into `buildLineageCommand` options | worker options object carries `attempt` |
+| `tests/unit/fanout-run.vitest.ts` | Unit coverage | add resume, fallback, attempt-1, probe tests | `vitest run` → 106/106 |
 | shared primary runtime | Production/shared execution surface | no change | operator-controlled merge remains separate |
 <!-- /ANCHOR:affected-surfaces -->
 
@@ -106,16 +112,22 @@ Repository-root prompt construction -> absolute skill contract path -> cli-devin
 ## 4. IMPLEMENTATION PHASES
 
 ### Phase 1: Confinement fix
-- [x] Scope cli-devin subprocess cwd to the lineage directory. Evidence: `.opencode/skills/system-deep-loop/runtime/scripts/fanout-run.cjs:2501`.
-- [x] Keep cli-opencode and native cwd behavior unchanged. Evidence: `.opencode/skills/system-deep-loop/runtime/scripts/fanout-run.cjs:2501` fallback.
+- [x] Scope cli-devin subprocess cwd to the lineage directory. Evidence: dispatch `cwd: lineage.kind === 'cli-devin' ? lineageDir : process.cwd()`.
+- [x] Keep cli-opencode and native cwd behavior unchanged. Evidence: the same expression's `process.cwd()` fallback.
 
 ### Phase 2: Contract-path fix
-- [x] Resolve `skillFile` against repository-root cwd before dispatch. Evidence: `.opencode/skills/system-deep-loop/runtime/scripts/fanout-run.cjs:1089`.
+- [x] Resolve `skillFile` against repository-root cwd before dispatch. Evidence: `buildLoopPrompt` `path.resolve(process.cwd(), ...)`.
 
-### Phase 3: Verification and record
+### Phase 3: Session-resume fix
+- [x] Thread the retry `attempt` into `buildLineageCommand` options. Evidence: the lineage worker options object carries `attempt`.
+- [x] Resume with `devin -c` + nudge when a session exists; else fresh `-p`. Evidence: `buildDevinLineageCommand` resume branch.
+- [x] Add the resume nudge and injectable session probe. Evidence: `buildDevinResumePrompt` and `devinLineageSessionExists`.
+
+### Phase 4: Verification and record
 - [x] Pass Node syntax validation. Evidence: `node --check .opencode/skills/system-deep-loop/runtime/scripts/fanout-run.cjs`.
 - [x] Run one GLM-5.2-max / cli-devin research iteration. Evidence: `implementation-summary.md` Verification table.
-- [x] Record `salvage_miss` as a separate follow-up. Evidence: `implementation-summary.md` KNOWN LIMITATIONS.
+- [x] Pass the unit suite. Evidence: `vitest run tests/unit/fanout-run.vitest.ts` → 106/106.
+- [ ] Confirm end-to-end free-tier resume. Evidence: pending the `glm-5-2` deep-review run.
 <!-- /ANCHOR:phases -->
 
 ---
@@ -127,8 +139,9 @@ Repository-root prompt construction -> absolute skill contract path -> cli-devin
 |-----------|-------|-------|
 | Syntax | patched fan-out script | `node --check` |
 | Containment | cli-devin lineage writes | GLM-5.2-max research iteration plus containment guard |
+| Unit | resume/fallback/attempt-gating/probe | `vitest run tests/unit/fanout-run.vitest.ts` → 106/106 |
 | Regression | non-cli-devin dispatch branch | conditional fallback to `process.cwd()` in `fanout-run.cjs` |
-| Usefulness | scoped leaf can read contract and research repository | observed research output from the patched iteration |
+| E2E (pending) | free-tier resumed turns persist `review-report.md` | `glm-5-2` deep-review run |
 <!-- /ANCHOR:testing -->
 
 ---
@@ -148,6 +161,6 @@ Repository-root prompt construction -> absolute skill contract path -> cli-devin
 <!-- ANCHOR:rollback -->
 ## 7. ROLLBACK PLAN
 
-- **Trigger**: The scoped cli-devin cwd blocks required repository reads or causes a runtime regression.
-- **Procedure**: Revert the two worktree-local hunks in `.opencode/skills/system-deep-loop/runtime/scripts/fanout-run.cjs`. The shared primary runtime is unchanged, so no shared-runtime rollback is required.
+- **Trigger**: The scoped cli-devin cwd blocks required repository reads, the resume path regresses non-devin executors, or `devin -c` picks up a wrong session.
+- **Procedure**: Revert the worktree-local hunks in `.opencode/skills/system-deep-loop/runtime/scripts/fanout-run.cjs` (write-scope and/or resume) and the matching unit tests. The resume path is opt-in per attempt and gated on the session probe, so reverting only the resume hunks leaves the write-scope fix intact. The shared primary runtime is unchanged, so no shared-runtime rollback is required.
 <!-- /ANCHOR:rollback -->

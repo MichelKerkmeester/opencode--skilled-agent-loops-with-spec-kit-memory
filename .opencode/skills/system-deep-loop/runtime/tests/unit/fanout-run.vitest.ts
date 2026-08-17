@@ -1136,7 +1136,14 @@ describe('fanout-run.cjs — cli-devin adapter', () => {
       prompt: string,
       resolvedSandbox: string,
       resolvedPermission: string,
-      options?: { env?: NodeJS.ProcessEnv; executableVersion?: string },
+      options?: {
+        env?: NodeJS.ProcessEnv;
+        executableVersion?: string;
+        attempt?: number;
+        loopType?: string;
+        lineageDir?: string;
+        devinSessionProbe?: (lineageDir: string, env: NodeJS.ProcessEnv) => boolean;
+      },
     ) => {
       command: string;
       args: string[];
@@ -1265,6 +1272,96 @@ describe('fanout-run.cjs — cli-devin adapter', () => {
       'default',
       { env },
     )).toThrow(/command -v devin failed/);
+  });
+
+  it('the first attempt starts a fresh session even when a session already exists', () => {
+    const binDir = makeTempDir('fanout-run-devin-first-attempt-');
+    writeStubBinary(binDir, 'devin');
+    const command = buildLineageCommand(
+      { kind: 'cli-devin', model: 'glm-5-2', label: 'devin-a' },
+      'full loop prompt',
+      'workspace-write',
+      'default',
+      {
+        env: { ...process.env, PATH: `${binDir}:${process.env.PATH ?? ''}` },
+        attempt: 1,
+        loopType: 'review',
+        lineageDir: '/tmp/lineage-a',
+        devinSessionProbe: () => true,
+      },
+    );
+    // attempt 1 is never a resume: it must open a fresh `-p` session with the full prompt.
+    expect(command.args[0]).toBe('-p');
+    expect(command.args).not.toContain('-c');
+    expect(command.args[1]).toBe('full loop prompt');
+  });
+
+  it('a retry continues the prior session with a resume nudge when one exists', () => {
+    const binDir = makeTempDir('fanout-run-devin-resume-');
+    writeStubBinary(binDir, 'devin');
+    const command = buildLineageCommand(
+      { kind: 'cli-devin', model: 'glm-5-2', label: 'devin-a' },
+      'full loop prompt',
+      'workspace-write',
+      'default',
+      {
+        env: { ...process.env, PATH: `${binDir}:${process.env.PATH ?? ''}` },
+        attempt: 2,
+        loopType: 'review',
+        lineageDir: '/tmp/lineage-a',
+        devinSessionProbe: () => true,
+      },
+    );
+    // -c continues the most-recent session in the lineage dir; the prompt is a short "finish
+    // what you started" nudge, not the full setup, so the resumed leaf does not restart.
+    expect(command.args[0]).toBe('-c');
+    expect(command.args[1]).toBe('-p');
+    const resumePrompt = command.args[2];
+    expect(resumePrompt).not.toBe('full loop prompt');
+    expect(resumePrompt).toContain('do NOT restart');
+    expect(resumePrompt).toContain('review-report.md');
+    expect(resumePrompt).toContain('/tmp/lineage-a');
+    expect(resumePrompt).toContain('FANOUT_LINEAGE_COMPLETE:devin-a');
+    // sandbox/permission flags are unchanged by the resume path.
+    expect(command.args).toContain('--sandbox');
+    expect(command.args).toEqual(expect.arrayContaining(['--model', 'glm-5-2']));
+  });
+
+  it('a retry falls back to a fresh start when the prior attempt opened no session', () => {
+    const binDir = makeTempDir('fanout-run-devin-resume-miss-');
+    writeStubBinary(binDir, 'devin');
+    const command = buildLineageCommand(
+      { kind: 'cli-devin', model: 'glm-5-2', label: 'devin-a' },
+      'full loop prompt',
+      'workspace-write',
+      'default',
+      {
+        env: { ...process.env, PATH: `${binDir}:${process.env.PATH ?? ''}` },
+        attempt: 2,
+        loopType: 'review',
+        lineageDir: '/tmp/lineage-a',
+        devinSessionProbe: () => false,
+      },
+    );
+    // Nothing to continue -> fresh `-p` with the full prompt, never a failing `devin -c`.
+    expect(command.args[0]).toBe('-p');
+    expect(command.args).not.toContain('-c');
+    expect(command.args[1]).toBe('full loop prompt');
+  });
+
+  it('the real session probe reports no session for an empty lineage dir', () => {
+    const { devinLineageSessionExists } = requireCjs(fanoutRunScript) as {
+      devinLineageSessionExists: (lineageDir: string, env?: NodeJS.ProcessEnv) => boolean;
+    };
+    // A directory the stub `devin list` cannot enumerate as JSON must resolve to "no session"
+    // so the caller falls back to a fresh start rather than a `devin -c` with nothing to continue.
+    const binDir = makeTempDir('fanout-run-devin-probe-');
+    writeStubBinary(binDir, 'devin');
+    const emptyDir = makeTempDir('fanout-run-devin-empty-lineage-');
+    expect(
+      devinLineageSessionExists(emptyDir, { ...process.env, PATH: `${binDir}:${process.env.PATH ?? ''}` }),
+    ).toBe(false);
+    expect(devinLineageSessionExists('', process.env)).toBe(false);
   });
 });
 

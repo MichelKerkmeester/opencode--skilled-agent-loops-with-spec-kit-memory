@@ -1,4 +1,5 @@
 {
+  "level": 1,
   "specFolder": "system-deep-loop/039-devin-lineage-write-scope",
   "description": "Deep-loop fan-out lineages using the cli-devin executor, including GLM 5.2 max, failed terminally when a leaf wrote outside its bound lineage",
   "keywords": [
@@ -18,13 +19,12 @@
     "bound",
     "lineage"
   ],
-  "lastUpdated": "2026-08-17T00:12:16.708Z",
+  "lastUpdated": "2026-08-17T05:10:50.291Z",
   "specId": "039",
   "folderSlug": "devin-lineage-write-scope",
   "parentChain": [
     "system-deep-loop"
   ],
   "memorySequence": 0,
-  "memoryNameHistory": [],
-  "level": 1
+  "memoryNameHistory": []
 }

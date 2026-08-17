@@ -1084,10 +1084,14 @@ async function persistPreDispatchWait({ checkpointPath, ledgerPath, runId, loopT
  */
 function buildLoopPrompt(loopType, specFolder, lineageDir, sessionId, lineage, researchTopic, options = {}) {
   assertActiveFanoutLoopType(loopType);
-  const skillFile =
+  // Absolute so a leaf whose cwd is scoped to its lineage dir (see the cli-devin
+  // dispatch cwd) can still resolve the contract file it must read.
+  const skillFile = path.resolve(
+    process.cwd(),
     loopType === 'review'
       ? '.opencode/skills/system-deep-loop/deep-review/SKILL.md'
-      : '.opencode/skills/system-deep-loop/deep-research/SKILL.md';
+      : '.opencode/skills/system-deep-loop/deep-research/SKILL.md',
+  );
   const agentName = loopType === 'review' ? 'deep-review' : 'deep-research';
   const detachedIntro = lineage.kind === 'cli-opencode'
     ? [
@@ -2490,7 +2494,11 @@ async function main() {
       let result;
       try {
         result = await runLineageProcess(command, cmdArgs, {
-          cwd: process.cwd(),
+          // Devin's --sandbox confines writes to the process cwd. Scoping the cwd to the
+          // lineage dir for that kind makes the OS confinement match the loop's write
+          // boundary, so a leaf that ignores the prompt boundary still physically cannot
+          // write outside its lineage dir. Reads stay repo-wide under --sandbox regardless.
+          cwd: lineage.kind === 'cli-devin' ? lineageDir : process.cwd(),
           timeoutMs,
           env: dispatchEnv,
           maxBuffer: 20 * 1024 * 1024,

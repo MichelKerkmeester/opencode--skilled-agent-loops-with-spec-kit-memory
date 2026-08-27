@@ -14,13 +14,40 @@ version: 1.0.0.1
 
 # Pi Remote Applied Code Standards
 
-This page summarizes how the sk-code standards apply to the Svelte-only Pi Remote app today. It is a
-current-state summary, not a point-in-time audit. SKILL.md §3 (surface standards) and §3b (source tree
-conventions) are the living authority; this page restates the applied shape at a glance.
+A current-state summary of how the sk-code standards apply to the Svelte-only Pi Remote app today.
 
 ---
 
-## 1. APPLIED SURFACE
+## 1. OVERVIEW
+
+### Purpose
+
+Restate the applied shape of the sk-code standards for the Pi Remote app in one place, so a workflow can
+see at a glance how module headers, naming, comments, CSS ownership, and the change gate land on this
+codebase.
+
+### When to Use
+
+- Before a code change on the app, to confirm the convention the change must hold
+- When reviewing a diff for header, naming, or comment conformance
+- When onboarding to how the Svelte-only app applies the shared standards
+
+### Core Principle
+
+This page is a current-state summary, not a point-in-time audit. It describes how the standards apply
+today, and it moves with the app rather than snapshotting a single moment.
+
+### Key Sources
+
+- `SKILL.md` §3 (surface standards) and §3b (source tree conventions) — the living authority this page
+  restates at a glance
+- [comment-grammar.md](../comment-grammar.md) — the comment convention and its scanner
+- [scoped-style-ownership.md](../scoped-style-ownership.md) — the component-scoped `<style>` ownership model
+- [verification.md](../verification.md) — the browser-free resolver proof and the command gate
+
+---
+
+## 2. APPLIED SURFACE
 
 The standards cover the TypeScript and Svelte source across the four workspaces — the protocol package
 under `packages/`, the relay under `app-relay/`, the mobile PWA under `app-mobile/`, and the approval
@@ -29,7 +56,7 @@ with component-scoped `<style>` blocks over the `app-mobile/src/app.css` foundat
 
 ---
 
-## 2. MODULE HEADERS AND SECTIONS
+## 3. MODULE HEADERS AND SECTIONS
 
 Every code file opens with a MODULE banner that names its component, and each shell script carries a
 COMPONENT block. Longer files divide the body with numbered section dividers. Docs use numbered ALL-CAPS
@@ -37,7 +64,7 @@ headings.
 
 ---
 
-## 3. NAMING
+## 4. NAMING
 
 Files are kebab-case, except `app-mobile/src/routes/**`, where SvelteKit owns the filenames. Functions
 are camelCase, interfaces and types are PascalCase, and constants are UPPER_SNAKE_CASE; booleans read as
@@ -46,7 +73,7 @@ compatibility — a documented, unchanged exception.
 
 ---
 
-## 4. COMMENTS
+## 5. COMMENTS
 
 Comments explain the durable WHY, start with a capital letter, and stay low-density. They never embed
 ephemeral identifiers — no spec, packet, phase, task, or ticket ids. The app's comment-grammar scanner,
@@ -54,7 +81,7 @@ ephemeral identifiers — no spec, packet, phase, task, or ticket ids. The app's
 
 ---
 
-## 5. STYLES AND CSS OWNERSHIP
+## 6. STYLES AND CSS OWNERSHIP
 
 Each component owns its presentation in a scoped `<style>` block; the primitive, semantic, and component
 token layers plus shared rules live in `app-mobile/src/app.css`. Nearby purpose comments explain the
@@ -63,8 +90,18 @@ presentation seam and `Do not edit — <why>` notes protect frozen lines. No com
 
 ---
 
-## 6. THE CHANGE GATE
+## 7. THE CHANGE GATE
 
 Every change runs `test:web`, `typecheck`, and `build`, and all three must pass before any completion
 claim. Security-sensitive code validates input, keeps secrets in the environment, and fails closed. For a
 design-system change, add the browser-free resolver proof from `verification.md`.
+
+---
+
+## 8. REFERENCES AND RELATED RESOURCES
+
+- [comment-grammar.md](../comment-grammar.md) — the comment convention and the `scan-comments.mjs` scanner
+- [scoped-style-ownership.md](../scoped-style-ownership.md) — the component-scoped `<style>` ownership model
+- [verification.md](../verification.md) — the browser-free resolver proof and the command gate
+- [security.md](./security.md) — the fail-closed security posture this gate assumes
+- [platform-support.md](./platform-support.md) — the platform matrix a change must hold

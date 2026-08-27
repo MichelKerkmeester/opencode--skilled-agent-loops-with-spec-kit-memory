@@ -70,14 +70,13 @@ Checklists (`assets/`) and the source-gates runner (`scripts/`) — token retint
 verification, BEM rename, runes-effect audit, story coverage, a11y parity, and `run-source-gates.sh`.
 See §4 for the full list.
 
-App documentation lives under `references/` in six purpose-named folders, each grouping one concern so
+App documentation lives under `references/` in five purpose-named folders, each grouping one concern so
 the set reads by intent:
 
 - `references/operations/` — running the live relay: `operations.md`, `incident-playbooks.md`, `rollback.md`.
 - `references/release/` — shipping a build: `ai-deploy-playbook.md`, `release-verification.md`.
 - `references/setup/` — first run: `setup.md`, `install-and-onboarding.md`.
 - `references/standards/` — the rules a change must hold: `code-standards.md`, `security.md`, `platform-support.md`.
-- `references/design-reference/` — the `mobile-chat-apps/` UI teardown, current-UI map, competitor research, and screens.
 - `references/quality/` — the DQI and full-access-runtime baselines.
 
 The **feature catalog** and the **manual testing playbook** are the single source of truth at the app

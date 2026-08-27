@@ -12,14 +12,27 @@ version: 1.2.0.3
 
 # Full-Access Runtime Baseline
 
-> Evidence that the deployed relay launches the intended full-access (desktop-parity)
-> pi child and that `/plan` produces a real, RPC-visible mode transition. This is the
-> Phase 0 gate: no new phone control, foundation asset, or UI work starts until the
-> operator-run fields below are filled from a live verifier pass.
+Records the live verifier evidence that proves the deployed relay launches a full-access (desktop-parity) pi child and that `/plan` produces a real, RPC-visible mode transition.
 
 ---
 
-## How to capture this baseline
+## 1. OVERVIEW
+
+### Purpose
+
+This is the Phase 0 gate. No new phone control, foundation asset, or UI work starts until the
+operator-run fields below are filled from a live verifier pass that shows the deployed relay launches the
+intended full-access pi child and that `/plan` transitions mode over RPC.
+
+### When to Use
+
+- Before any phone-control, foundation-asset, or UI work begins on the app
+- After a relay redeploy that could change the full-access boot path
+- When capturing or refreshing the operator-observed evidence from a live verifier run
+
+---
+
+## 2. HOW TO CAPTURE THIS BASELINE
 
 Run the black-box verifier against the live pi installation used by the deployment:
 
@@ -36,7 +49,7 @@ downstream phone control dark.
 
 ---
 
-## Fixed contract (verified in code, not operator-entered)
+## 3. FIXED CONTRACT (VERIFIED IN CODE, NOT OPERATOR-ENTERED)
 
 | Field                               | Value                                                                 |
 | ----------------------------------- | --------------------------------------------------------------------- |
@@ -51,7 +64,7 @@ without migration is guarded by the rollback drill.
 
 ---
 
-## Operator-observed evidence (fill from a live verifier pass)
+## 4. OPERATOR-OBSERVED EVIDENCE (FILL FROM A LIVE VERIFIER PASS)
 
 | Field                                | Value                                                 |
 | ------------------------------------ | ----------------------------------------------------- |
@@ -71,7 +84,7 @@ without migration is guarded by the rollback drill.
 
 ---
 
-## Rollback
+## 5. ROLLBACK
 
 Runtime and visible-phase rollback requires no database or schema migration. To roll back:
 
@@ -89,7 +102,7 @@ that the full-access posture relaunches against the restored database without a 
 
 ---
 
-## Baseline screenshots
+## 6. BASELINE SCREENSHOTS
 
 Capture the current app appearance before any Foundation (F1) restyle work begins, so the
 inert-restyle phases can be proven pixel-stable against this reference. Record the file
@@ -98,3 +111,11 @@ names and capture context here:
 | Screenshot | Context (device, theme, screen) | Captured  |
 | ---------- | ------------------------------- | --------- |
 | _pending_  | _pending_                       | _pending_ |
+
+---
+
+## 7. REFERENCES AND RELATED RESOURCES
+
+- [release-verification.md](../release/release-verification.md) — the release-time verification gate this baseline feeds
+- [rollback.md](../operations/rollback.md) — the operational rollback procedure and drill
+- [operations.md](../operations/operations.md) — running the live relay the verifier speaks to

@@ -13,15 +13,28 @@ contextType: implementation
 version: 1.0.0.0
 ---
 
-# BEM Class-Rename Checklist
+# BEM Class-Rename Checklist - block--element Rename Safety Gate
 
-Use this BEFORE claiming a CSS class rename (to `block--element` BEM) is complete or
-behaviour-preserving. A mechanical rename breaks rendering silently through dynamic
-construction sites and shared strings — only the render proof catches those.
+Use this before claiming a CSS class rename (to `block--element` BEM) is complete. Work through it in order and treat THE GATE as the completion bar.
 
 ---
 
-## 1. INJECTIVE MAP
+## 1. OVERVIEW
+
+### Purpose
+
+A mechanical rename breaks rendering silently through dynamic construction sites and shared strings — only
+the render proof catches those. This checklist proves a rename stayed injective and behaviour-preserving
+before any completion claim.
+
+### Usage
+
+Run through sections 2 through 7 before claiming any `block--element` rename is done, then confirm THE
+GATE. Section 6 (render proof) is the step that actually catches a bad rename.
+
+---
+
+## 2. INJECTIVE MAP
 
 - [ ] Wrote an explicit old->new map; it is injective — no two old classes collapse onto one
   new class, and no new class collides with a name already in the tree
@@ -31,7 +44,7 @@ construction sites and shared strings — only the render proof catches those.
 
 ---
 
-## 2. STATIC OCCURRENCES
+## 3. STATIC OCCURRENCES
 
 - [ ] Every literal occurrence replaced at token boundaries: `rg -nw "<old-class>" app-mobile/src`
   returns 0 in class and selector contexts (the `-w` word boundary avoids substring false hits)
@@ -40,7 +53,7 @@ construction sites and shared strings — only the render proof catches those.
 
 ---
 
-## 3. DYNAMIC CONSTRUCTION SITES
+## 4. DYNAMIC CONSTRUCTION SITES
 
 Every interpolated class must resolve to a real rule. Enumerate them:
 
@@ -60,7 +73,7 @@ Every interpolated class must resolve to a real rule. Enumerate them:
 
 ---
 
-## 4. STATE AND DATA STRINGS LEFT ALONE
+## 5. STATE AND DATA STRINGS LEFT ALONE
 
 - [ ] `is-*` state classes kept single-dash — no `is--` double-dash introduced:
   `rg -n "is--" app-mobile/src` -> 0
@@ -70,7 +83,7 @@ Every interpolated class must resolve to a real rule. Enumerate them:
 
 ---
 
-## 5. VALUE AND NAMING-GRAMMAR PROOF
+## 6. VALUE AND NAMING-GRAMMAR PROOF
 
 - [ ] Filename grammar clean: `node scripts/naming/scan-naming.mjs` exits 0 (no component file
   name drifted out of kebab grammar during the pass)
@@ -81,7 +94,7 @@ Every interpolated class must resolve to a real rule. Enumerate them:
 
 ---
 
-## 6. RENDER PROOF (the gate that actually catches a bad rename)
+## 7. RENDER PROOF (THE GATE THAT ACTUALLY CATCHES A BAD RENAME)
 
 - [ ] `node scripts/catalog-smoke-cdp.mjs` exits 0 — every Storybook story renders in light AND
   dark with zero throws (exit 2 = a story threw)
@@ -91,10 +104,18 @@ Every interpolated class must resolve to a real rule. Enumerate them:
 
 ---
 
-## 7. THE GATE
+## 8. THE GATE
 
 The rename is "done" only when: the map is injective; `rg -nw "<old-class>"` is 0 across
 `app.css` and all `<style>` blocks; every dynamic/compound site resolves to a real rule;
 `is-*` stayed single-dash and ids/custom-props/enums stayed as data; `scan-naming.mjs` and
 `token-identity.mjs verify` pass; `catalog-smoke-cdp.mjs` is clean with a matching screenshot
 pair; and `npm run test:web` is green.
+
+---
+
+## 9. RELATED RESOURCES
+
+- [token-retint-checklist.md](./token-retint-checklist.md) — the exemplar checklist shape this file follows
+- [css-class-naming-bem.md](../references/css-class-naming-bem.md) — the block--element naming reference in full
+- [verification.md](../references/verification.md) — the command gate and verification method in full

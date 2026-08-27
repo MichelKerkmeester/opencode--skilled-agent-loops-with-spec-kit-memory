@@ -20,5 +20,5 @@ subfolders).
 | 7 | PR-007 | ACCESSIBILITY | `accessibility-routing.md` |
 
 Every scenario assumes the hub's surface detection has already resolved **PI_REMOTE** (CWD or
-changed/target files under `apps/pi-remote-web/`) and bundled this packet behind a workflow mode; the
+changed/target files under `app-mobile/`) and bundled this packet behind a workflow mode; the
 scenario then exercises which reference/asset set the sample prompt's intent should load.
